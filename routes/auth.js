@@ -1,28 +1,35 @@
 const express = require('express');
 const router = express.Router();
-const { check, validationResult } = require('express-validator');
+const auth = require('../middleware/auth');
 const User = require('../models/User');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const gravatar = require('gravatar');
+const { check, validationResult } = require('express-validator');
 const config = require('config');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-// @route POST /users
-// @description: Register users
+// @route GET /auth
+// description Getting user information by token passed
+// @access Public
+
+router.get('/', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route POST /auth
+// @desc Authenticate user & get token
 // @access Public
 
 router.post(
-  // uses express-validator to check email and password
   '/',
   [
-    check('name', 'Name is required').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
-    check(
-      'password',
-      'Please enter a password with 6 or more characters'
-    ).isLength({
-      min: 6,
-    }),
+    check('password', 'Password is required').exists(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -31,43 +38,32 @@ router.post(
         errors: errors.array(),
       });
     }
-
-    const { name, email, password } = req.body;
-
-    //See if the user exists
+    const { email, password } = req.body;
     try {
+      //See if the user exists
       let user = await User.findOne({
         email,
       });
-      if (user) {
+      if (!user) {
         return res.status(400).json({
           errors: [
             {
-              msg: 'User already exists',
+              msg: 'Invalid Credential',
             },
           ],
         });
       }
+      const isMatch = await bcrypt.compare(password, user.password);
 
-      // Get users gravatar
-      const avatar = gravatar.url(email, {
-        s: '200',
-        r: 'pg',
-        d: 'mm',
-      });
-      user = new User({
-        name,
-        email,
-        avatar,
-        password,
-      });
-
-      // Encrpt password using bcrypt
-      const salt = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hash(password, salt);
-
-      await user.save();
-
+      if (!isMatch) {
+        return res.status(400).json({
+          errors: [
+            {
+              msg: 'Invalid Credential',
+            },
+          ],
+        });
+      }
       // Return jsonwebtoken
       const payload = {
         user: {
@@ -90,5 +86,4 @@ router.post(
     }
   }
 );
-
 module.exports = router;
