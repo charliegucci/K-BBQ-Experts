@@ -1,8 +1,12 @@
 const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser')
 const connectDB = require('./config/db');
 const newsRouter = require('./routes/news_routes')
 
 const app = express();
+app.use(cors())
+app.use(bodyParser())
 
 //connect Database
 connectDB();

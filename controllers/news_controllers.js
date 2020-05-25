@@ -13,8 +13,8 @@ const getArticles = (req, res) => {
                     filtered.push(article)
                 }
             }
-            console.log(filtered)
-            console.log(filtered.length)
+            // console.log(filtered)
+            // console.log(filtered.length)
             res.send(filtered)
         });
 } 
