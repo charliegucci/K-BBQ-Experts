@@ -16,7 +16,7 @@
             <li><a href="#home" onclick="toggle()">Home</a></li>
             <li><a href="#about" onclick="toggle()">About</a></li>
             <li><a href="#services" onclick="toggle()">Services</a></li>
-            <li><a href="#portfolio" onclick="toggle()">Current News</a></li>
+            <li><a href="#currentNews" onclick="toggle()">Current News</a></li>
             <li><a href="#team" onclick="toggle()">Team</a></li>
             <li><a href="#contact" onclick="toggle()">Contact</a></li>
         </ul>
@@ -45,7 +45,7 @@
     </section>
 
     <!-- Current News -->
-    <section class="sec work" id="portfolio">
+    <section class="sec work" id="currentNews">
         <div class="content">
             <div class="mxw800p">
                 <h3>Current News</h3>
@@ -54,46 +54,14 @@
                     quis nostrud exercitation ullamco.</p>
             </div>
             <div class="workBx">
-                <div class="brand">
+                <div class="brand" id="news">
                     <a href="#">
-                        <h2>News</h2>
+                        <ul>
+
+                        </ul>
                     </a>
                 </div>
-                <div class="brand">
-                    <a href="#">
-                        <h2>News</h2>
-                    </a>
-                </div>
-                <div class="brand">
-                    <a href="#">
-                        <h2>News</h2>
-                    </a>
-                </div>
-                <div class="brand">
-                    <a href="#">
-                        <h2>News</h2>
-                    </a>
-                </div>
-                <div class="brand">
-                    <a href="#">
-                        <h2>News</h2>
-                    </a>
-                </div>
-                <div class="brand">
-                    <a href="#">
-                        <h2>News</h2>
-                    </a>
-                </div>
-                <div class="brand">
-                    <a href="#">
-                        <h2>News</h2>
-                    </a>
-                </div>
-                <div class="brand">
-                    <a href="#">
-                        <h2>News</h2>
-                    </a>
-                </div>
+
             </div>
         </div>
     </section>
@@ -182,7 +150,7 @@
             <div class="teamBx">
                 <div class="member">
                     <div class="imgBx">
-                        <img src="/img/caleb.png">
+                        <img src="./img/caleb.png">
                     </div>
                     <div class="details">
                         <div>
@@ -263,18 +231,8 @@
             <p class="copyright">Design & Developed By <a href="#">K-BBQ Experts</a></p>
         </div>
     </section>
-    <script type="text/javascript">
-        window.addEventListener("scroll", function () {
-            var header = document.querySelector("header");
-            header.classList.toggle("sticky", window.scrollY > 0);
-        })
 
-        function toggle() {
-            var header = document.querySelector("header");
-            header.classList.toggle("active");
-        }
-    </script>
-    <script src="script.js"></script>
-    </body>
+    <script type="text/javascript" src="./script.js"></script>
+</body>
 
 </html>

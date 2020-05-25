@@ -1,11 +1,26 @@
-const root_url = 'http://localhost:5000'
+const root_url = 'http://localhost:5000';
 
-let articles = null
+let articles = null;
 
-// fetch(root_url+'/news').then((response) => {
-//     articles = response
-//     console.log(articles)
+  header.classList.toggle('sticky', window.scrollY > 0);
+window.addEventListener('scroll', function () {
+  var header = document.querySelector('header');
+});
 
-//     // Wilson do your JS adding the articles in here
-//     // articles should be populated
-// })
+  var header = document.querySelector('header');
+function toggle() {
+  header.classList.toggle('active');
+}
+
+const listArticles = async function () {
+  const articles = await fetch(root_url + '/news').then((response) =>
+    response.json()
+  );
+  console.log(articles);
+  return articles;
+};
+
+listArticles().then((response) => {
+  let newsEle = document.getElementById('news');
+  newsEle.innerHTML = response;
+});

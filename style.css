@@ -13,7 +13,7 @@ html {
 
 body {
   min-height: 1000px;
-  cursor: url('./img/cursor.png'), pointer;
+  /* cursor: url('./img/cursor.png'), pointer; */
 }
 
 header {
