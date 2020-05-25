@@ -2,14 +2,14 @@ const puppeteer = require('puppeteer');
 const re = new RegExp('(covid\-19|coronavirus|corona|covid)', 'i')
 
 
-async function run () {
+async function getNews () {
 
     const articles = []
 
     //async function for abc.com.au
     async function headlinesABC () {
 
-    const browser1 = await puppeteer.launch({headless:false})
+    const browser1 = await puppeteer.launch({headless:true})
     const page = await browser1.newPage()
 
     await page.setRequestInterception(true);
@@ -61,7 +61,7 @@ async function run () {
     //async function for news.com.au
     async function headlinesNEWS () {
 
-    const browser2 = await puppeteer.launch({headless:false})
+    const browser2 = await puppeteer.launch({headless:true})
     const page = await browser2.newPage()
 
     await page.setRequestInterception(true);
@@ -116,8 +116,10 @@ async function run () {
 
 }
 
+module.exports = { getNews }
 
-run().then((data) =>{
 
-    console.log(data)
-})
+// getNews().then((data) =>{
+
+//     console.log(data)
+// })
