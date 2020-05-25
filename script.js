@@ -8,3 +8,13 @@ fetch(root_url + `/scrape`)
     // Data is an array of news article objects
   })
   .catch((err) => console.log(err));
+
+window.addEventListener('scroll', function () {
+  var header = document.querySelector('header');
+  header.classList.toggle('sticky', window.scrollY > 0);
+});
+
+function toggle() {
+  var header = document.querySelector('header');
+  header.classList.toggle('active');
+}
