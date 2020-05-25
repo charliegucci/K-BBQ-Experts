@@ -1,11 +1,13 @@
 const root_url = 'http://localhost:5000'
 
-let articles = null
+let country = 'au'
 
-// fetch(root_url+'/news').then((response) => {
-//     articles = response
-//     console.log(articles)
+fetch(root_url+`/news/${country}`)
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data)
+        // Wilson- you can start manipulating the DOM here
+        // Data is an array of news article objects
 
-//     // Wilson do your JS adding the articles in here
-//     // articles should be populated
-// })
+    })
+    .catch((err) => console.log(err))
