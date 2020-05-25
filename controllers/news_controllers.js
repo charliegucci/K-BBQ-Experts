@@ -1,13 +1,22 @@
-const {
-    getNews
-} = require('../scrape')
+const NewsAPI = require('newsapi');
+const newsapi = new NewsAPI('32ef6b88f45042758d911b23df94e868');
+const re = new RegExp('(covid\-19|coronavirus|corona|covid)', 'i')
 
 const getArticles = (req, res) => {
-    getNews().then((data) => {
-        console.log(data)
-        res.send(data)
-    })
-    .catch((err) => console.log(err))
+    newsapi.v2.topHeadlines({
+        language: 'en',
+        country: req.params.country
+        }).then((data) => {
+            let filtered = []
+            for (article of data.articles) {
+                if (!re.test(article.title) && !re.test(article.content)) {
+                    filtered.push(article)
+                }
+            }
+            console.log(filtered)
+            console.log(filtered.length)
+            res.send(filtered)
+        });
 } 
 
 module.exports = { getArticles }

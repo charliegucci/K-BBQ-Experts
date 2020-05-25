@@ -5,7 +5,7 @@ const {
 } = require('../controllers/news_controllers')
 
 
-router.get("/", getArticles)
+router.get("/:country", getArticles)
 
 
 
