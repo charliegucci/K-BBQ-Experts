@@ -5,7 +5,7 @@ const {
 } = require('../controllers/news_controllers')
 
 
-router.get("/", setConnectionTimeout('12h'), getArticles)
+router.get("/:country", getArticles)
 
 
 
