@@ -1,4 +1,4 @@
-const root_url = 'https://nocovidhere.herokuapp.com/';
+const root_url = 'https://nocovidhere.herokuapp.com';
 
 fetch(root_url + `/news`)
   .then((response) => response.json())
