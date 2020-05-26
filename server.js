@@ -24,6 +24,7 @@ app.get('/', (req, res) => res.send('API Running'));
 app.use('/users', require('./routes/users'));
 app.use('/auth', require('./routes/auth'));
 app.use('/scrape', require('./routes/scrape'));
+app.use('/news', require('./routes/news'));
 
 // Scrapper
 
