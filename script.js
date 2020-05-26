@@ -1,24 +1,34 @@
 const root_url = 'http://localhost:5000';
 
-fetch(root_url + `/scrape`)
+fetch(root_url + `/news`)
   .then((response) => response.json())
   .then((data) => {
     console.log(data);
     // Wilson- you can start manipulating the DOM here
     // Data is an array of news article objects
     let list = document.getElementById('news');
+
     for (i = 0; i < data.length; i++) {
+      let container = document.createElement('div');
+      container.style.padding = '3rem';
+      container.style.wordWrap = 'break-word';
+      container.style.border = 'thin solid #000';
+      container.style.margin = ' 2rem 1rem';
+      container.style.backgroundColor = '#dfdfdf';
       let headlines = document.createElement('h2');
-      headlines.innerHTML = data[i].heading;
-      list.appendChild(headlines);
+      headlines.innerHTML = data[i].headline;
+      container.appendChild(headlines);
       let content = document.createElement('p');
-      content.innerHTML = data[i].content;
-      list.appendChild(content);
+      for (sentence of data[i].content) {
+        content.innerHTML = content.innerHTML + ' ' + sentence;
+      }
+      container.appendChild(content);
       let reference = document.createElement('a');
       reference.setAttribute('href', data[i].url);
       reference.setAttribute('target', '_blank');
       reference.innerHTML = data[i].url;
-      list.appendChild(reference);
+      container.appendChild(reference);
+      list.appendChild(container);
     }
   })
   .catch((err) => console.log(err));
