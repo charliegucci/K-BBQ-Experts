@@ -4,12 +4,14 @@ fetch(root_url + `/news`)
   .then((response) => response.json())
   .then((data) => {
     console.log(data);
+
     // Wilson- you can start manipulating the DOM here
     // Data is an array of news article objects
     let list = document.getElementById('news');
 
-    for (i = 0; i < data.length; i++) {
+    for (i = data.length - 1; i >= 0; i--) {
       let container = document.createElement('div');
+      container.setAttribute('id', 'news-item');
       container.style.padding = '3rem';
       container.style.wordWrap = 'break-word';
       container.style.border = 'thin solid #000';
@@ -19,6 +21,8 @@ fetch(root_url + `/news`)
       headlines.innerHTML = data[i].headline;
       container.appendChild(headlines);
       let content = document.createElement('p');
+      content.style.height = '190px';
+      content.style.overflow = 'hidden';
       for (sentence of data[i].content) {
         content.innerHTML = content.innerHTML + ' ' + sentence;
       }
@@ -26,7 +30,7 @@ fetch(root_url + `/news`)
       let reference = document.createElement('a');
       reference.setAttribute('href', data[i].url);
       reference.setAttribute('target', '_blank');
-      reference.innerHTML = data[i].url;
+      reference.innerHTML = '...Read More';
       container.appendChild(reference);
       list.appendChild(container);
     }

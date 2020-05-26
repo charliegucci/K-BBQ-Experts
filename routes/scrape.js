@@ -15,18 +15,18 @@ router.get('/', async (req, res) => {
     .then(async function (data) {
       console.log(data);
       for (article of data) {
-        let checkHeading = await article.heading;
+        let articleHeadline = await article.heading;
         let articleContent = await article.content;
         let articleUrl = await article.url;
-        Article.findOne({ headline: checkHeading }, (err, article) => {
+        Article.findOne({ url: articleUrl }, (err, article) => {
           if (err) {
             console.log(err);
           }
           if (article) {
-            console.log('article saved', checkHeading);
+            console.log('article saved', articleHeadline);
           } else {
             let newArticle = new Article({
-              headline: checkHeading,
+              headline: articleHeadline,
               content: articleContent,
               url: articleUrl,
             });
