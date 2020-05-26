@@ -25,10 +25,12 @@ router.get('/', async (req, res) => {
           if (article) {
             console.log('article saved', articleHeadline);
           } else {
+            let date = Date.now();
             let newArticle = new Article({
               headline: articleHeadline,
               content: articleContent,
               url: articleUrl,
+              addedOn: date,
             });
             newArticle
               .save()

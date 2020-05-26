@@ -29,6 +29,10 @@ const ArticleSchema = new mongoose.Schema({
       comment: String,
     },
   ],
+  addedOn: {
+    type: Date,
+    required: true,
+  },
 });
 
 module.exports = Article = mongoose.model('Article', ArticleSchema);

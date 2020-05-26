@@ -1,4 +1,4 @@
-const root_url = 'http://localhost:5000';
+const root_url = 'https://nocovidhere.herokuapp.com';
 
 fetch(root_url + `/news`)
   .then((response) => response.json())
@@ -21,7 +21,7 @@ fetch(root_url + `/news`)
       headlines.innerHTML = data[i].headline;
       container.appendChild(headlines);
       let content = document.createElement('p');
-      content.setAttribute('id',`content${i}`)
+      content.setAttribute('id', `content${i}`);
       // content.style.backgroundColor = 'blue'
       content.style.height = '190px';
       content.style.overflow = 'hidden';
@@ -30,31 +30,29 @@ fetch(root_url + `/news`)
       }
       container.appendChild(content);
       let reference = document.createElement('a');
-      reference.setAttribute('id', `read-more-${i}`)
-      reference.setAttribute('class', 'expand-btn')
+      reference.setAttribute('id', `read-more-${i}`);
+      reference.setAttribute('class', 'expand-btn');
       // reference.setAttribute('href', data[i].url);
       // reference.setAttribute('target', '_blank');
-      reference.setAttribute('type', 'button')
-      
+      reference.setAttribute('type', 'button');
+
       reference.innerHTML = '...Read More';
       container.appendChild(reference);
       reference.addEventListener('click', () => {
         if (reference.innerHTML == '...Read More') {
-          content.style.height = 'auto'
-          reference.innerHTML = 'close'
-          let link = document.createElement('a')
-          link.setAttribute('href', data[i].url)
-          link.setAttribute('target', '_blank')
-          content.appendChild(link)
-
+          content.style.height = 'auto';
+          reference.innerHTML = 'close';
+          let link = document.createElement('a');
+          link.setAttribute('href', data[i].url);
+          link.setAttribute('target', '_blank');
+          content.appendChild(link);
         } else {
           content.style.height = '190px';
-          reference.innerHTML = "...Read More"
+          reference.innerHTML = '...Read More';
         }
       });
       list.appendChild(container);
     }
-
 
     // let count = data.length - 1
   })
@@ -69,4 +67,3 @@ function toggle() {
   var header = document.querySelector('header');
   header.classList.toggle('active');
 }
-
