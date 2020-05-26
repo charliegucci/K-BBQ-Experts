@@ -23,18 +23,9 @@ app.get('/', (req, res) => res.send('API Running'));
 // Define Routes
 app.use('/users', require('./routes/users'));
 app.use('/auth', require('./routes/auth'));
-app.use('/news', newsRouter);
+app.use('/scrape', require('./routes/scrape'));
 
 // Scrapper
-app.get('/scrape', (req, res) => {
-  console.log('scraping...');
-  getNews()
-    .then((data) => {
-      console.log(data);
-      res.send(data);
-    })
-    .catch((err) => console.log(err));
-});
 
 // Define Port Number
 const PORT = process.env.PORT || 5000;
