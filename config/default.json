@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://kbbq:1234567890@cluster0-0uo9m.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "kbbqmaster"
+}
