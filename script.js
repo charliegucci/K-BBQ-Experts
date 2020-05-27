@@ -1,15 +1,28 @@
 const root_url = 'https://nocovidhere.herokuapp.com';
 
+const page = document.createElement('div');
+page.setAttribute('id', 'pagination-container');
+const pageNum1 = document.createElement('p');
+const pageNum2 = document.createElement('p');
+pageNum1.setAttribute('class', 'pgCursor');
+pageNum1.innerHTML = '<';
+pageNum1.setAttribute('id', 'beforePagination');
+pageNum2.setAttribute('id', 'afterPagination');
+pageNum2.innerHTML = '>';
+pageNum2.setAttribute('class', 'pgCursor');
+page.appendChild(pageNum1);
+page.appendChild(pageNum2);
+
 const loadNews = async function () {
   await fetch(root_url + `/news`)
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-  
+
       // Wilson- you can start manipulating the DOM here
       // Data is an array of news article objects
       let list = document.getElementById('news');
-  
+      list.removeChild(document.querySelector('#spinner'));
       for (i = data.length - 1; i >= 0; i--) {
         let container = document.createElement('div');
         container.setAttribute('class', 'news-div');
@@ -22,132 +35,141 @@ const loadNews = async function () {
         let headlines = document.createElement('h2');
         headlines.innerHTML = data[i].headline;
         container.appendChild(headlines);
-        let content = document.createElement('p');
-        content.setAttribute('id', `content${i}`);
+        let contentEl = document.createElement('p');
+        contentEl.setAttribute('id', `content${i}`);
         // content.style.backgroundColor = 'blue'
-        content.style.height = '200px';
-        content.style.overflow = 'hidden';
+        contentEl.style.height = '200px';
+        contentEl.style.overflow = 'hidden';
+        // let counter = 0;
         for (sentence of data[i].content) {
-          content.innerHTML = content.innerHTML + ' ' + sentence;
+          contentEl.innerHTML = contentEl.innerHTML + ' ' + sentence;
+          if (
+            data[i].content.indexOf(sentence) % 5 === 0 &&
+            data[i].content.indexOf(sentence) !== 0
+          ) {
+            contentEl.innerHTML = contentEl.innerHTML + '<br/><br/>';
+          }
         }
-        container.appendChild(content);
+        container.appendChild(contentEl);
         let reference = document.createElement('a');
         reference.setAttribute('id', `read-more-${i}`);
         reference.setAttribute('class', 'expand-btn');
         // reference.setAttribute('href', data[i].url);
         // reference.setAttribute('target', '_blank');
         reference.setAttribute('type', 'button');
-  
+
         reference.innerHTML = '...Read More';
         container.appendChild(reference);
         reference.addEventListener('click', () => {
           if (reference.innerHTML == '...Read More') {
-            content.style.height = 'auto';
+            contentEl.style.height = 'auto';
             reference.innerHTML = 'close';
             let link = document.createElement('a');
             link.setAttribute('href', data[i].url);
             link.setAttribute('target', '_blank');
           } else {
-            content.style.height = '200px';
+            contentEl.style.height = '200px';
             reference.innerHTML = '...Read More';
           }
         });
         list.appendChild(container);
       }
-  
+      let contentWrapper = document.getElementsByClassName('content')[0];
+      contentWrapper.appendChild(page);
+
       // let count = data.length - 1
     })
     .catch((err) => console.log(err));
 
-    $(document).ready(function () {
-      var numOfPage = 5,
-        wrapper = 'content',
-        itemClass = 'news-div',
-        pgID = 'pagination-container',
-        pgClass = 'pgCursor',
-        pgColor = '#fefefe',
-        pgColorActive = '#dfdfdf',
-        pgCustomClass = 'customPagination';
-    
-      function paginate() {
-        if ($('#' + pgID).children().length > 8) {
-          var a = $('.activePagination').attr('data-valor');
-          if (a >= 4) {
-            var i = parseInt(a) - 3,
-              o = parseInt(a) + 2;
-            $('.paginacaoValor').hide(),
-              (exibir2 = $('.paginacaoValor').slice(i, o).show());
-          } else
-            $('.paginacaoValor').hide(),
-              (exibir2 = $('.paginacaoValor').slice(0, 5).show());
-        }
-      }
-      paginate(), $('#beforePagination').hide(), $('.' + itemClass).hide();
-      for (
-        var tamanhotabela = $('.' + wrapper).children().length,
-          porPagina = numOfPage,
-          paginas = Math.ceil(tamanhotabela / porPagina),
-          i = 1;
-        i <= paginas;
-    
-      )
-        $('#' + pgID).append(
-          "<p class='paginacaoValor " +
-            pgCustomClass +
-            "' data-valor=" +
-            i +
-            '>' +
-            i +
-            '</p>'
-        ),
-          i++,
+  $(document).ready(function () {
+    var numOfPage = 5,
+      wrapper = 'content',
+      itemClass = 'news-div',
+      pgID = 'pagination-container',
+      pgClass = 'pgCursor',
+      pgColor = '#fefefe',
+      pgColorActive = '#dfdfdf',
+      pgCustomClass = 'customPagination';
+
+    function paginate() {
+      if ($('#' + pgID).children().length > 8) {
+        var a = $('.activePagination').attr('data-valor');
+        if (a >= 4) {
+          var i = parseInt(a) - 3,
+            o = parseInt(a) + 2;
           $('.paginacaoValor').hide(),
-          (exibir2 = $('.paginacaoValor').slice(0, 5).show());
-      $('.paginacaoValor:eq(0)')
-        .css('background', '' + pgColorActive)
-        .addClass('activePagination');
-      var exibir = $('.' + itemClass)
-        .slice(0, porPagina)
-        .show();
-      $('.paginacaoValor').on('click', function () {
-        $('.paginacaoValor')
-          .css('background', '' + pgColor)
-          .removeClass('activePagination'),
-          $(this)
-            .css('background', '' + pgColorActive)
-            .addClass('activePagination');
-        var a = $(this).attr('data-valor'),
-          i = a * porPagina,
-          o = i - porPagina;
-        $('.' + itemClass).hide(),
-          (exibir = $('.' + itemClass)
-            .slice(o, i)
-            .show()),
-          '1' === a ? $('#beforePagination').hide() : $('#beforePagination').show(),
-          a === '' + $('.paginacaoValor:last').attr('data-valor')
-            ? $('#afterPagination').hide()
-            : $('#afterPagination').show(),
-          paginate();
+            (exibir2 = $('.paginacaoValor').slice(i, o).show());
+        } else
+          $('.paginacaoValor').hide(),
+            (exibir2 = $('.paginacaoValor').slice(0, 5).show());
+      }
+    }
+    paginate(), $('#beforePagination').hide(), $('.' + itemClass).hide();
+    for (
+      var tamanhotabela = $('.' + wrapper).children().length,
+        porPagina = numOfPage,
+        paginas = Math.ceil(tamanhotabela / porPagina),
+        i = 1;
+      i <= paginas;
+
+    )
+      $('#' + pgID).append(
+        "<p class='paginacaoValor " +
+          pgCustomClass +
+          "' data-valor=" +
+          i +
+          '>' +
+          i +
+          '</p>'
+      ),
+        i++,
+        $('.paginacaoValor').hide(),
+        (exibir2 = $('.paginacaoValor').slice(0, 5).show());
+    $('.paginacaoValor:eq(0)')
+      .css('background', '' + pgColorActive)
+      .addClass('activePagination');
+    var exibir = $('.' + itemClass)
+      .slice(0, porPagina)
+      .show();
+    $('.paginacaoValor').on('click', function () {
+      $('.paginacaoValor')
+        .css('background', '' + pgColor)
+        .removeClass('activePagination'),
+        $(this)
+          .css('background', '' + pgColorActive)
+          .addClass('activePagination');
+      var a = $(this).attr('data-valor'),
+        i = a * porPagina,
+        o = i - porPagina;
+      $('.' + itemClass).hide(),
+        (exibir = $('.' + itemClass)
+          .slice(o, i)
+          .show()),
+        '1' === a
+          ? $('#beforePagination').hide()
+          : $('#beforePagination').show(),
+        a === '' + $('.paginacaoValor:last').attr('data-valor')
+          ? $('#afterPagination').hide()
+          : $('#afterPagination').show(),
+        paginate();
+    }),
+      $('.paginacaoValor').last().after($('#afterPagination')),
+      $('#beforePagination').on('click', function () {
+        var a = $('.activePagination').attr('data-valor'),
+          i = parseInt(a) - 1;
+        $('[data-valor=' + i + ']').click(), paginate();
       }),
-        $('.paginacaoValor').last().after($('#afterPagination')),
-        $('#beforePagination').on('click', function () {
-          var a = $('.activePagination').attr('data-valor'),
-            i = parseInt(a) - 1;
-          $('[data-valor=' + i + ']').click(), paginate();
-        }),
-        $('#afterPagination').on('click', function () {
-          var a = $('.activePagination').attr('data-valor'),
-            i = parseInt(a) + 1;
-          $('[data-valor=' + i + ']').click(), paginate();
-        }),
-        $('.paginacaoValor').css('float', 'left'),
-        $('.' + pgClass).css('float', 'left');
-    });
-    
+      $('#afterPagination').on('click', function () {
+        var a = $('.activePagination').attr('data-valor'),
+          i = parseInt(a) + 1;
+        $('[data-valor=' + i + ']').click(), paginate();
+      }),
+      $('.paginacaoValor').css('float', 'left'),
+      $('.' + pgClass).css('float', 'left');
+  });
+};
 
-}
-
-loadNews()
+loadNews();
 
 // header
 window.addEventListener('scroll', function () {
