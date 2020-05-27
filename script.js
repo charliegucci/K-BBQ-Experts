@@ -8,16 +8,7 @@ fetch(root_url + `/news`)
     // Wilson- you can start manipulating the DOM here
     // Data is an array of news article objects
     let list = document.getElementById('news');
-    for (i = 0; i < data.length; i++) {
-      let page = document.createElement('a');
-      page.setAttribute('href', '#');
-      page.setAttribute(
-        'onclick',
-        `showPage(${data.length - i} ); return false;`
-      );
-      page.innerHTML = i + 1 + ' ';
-      list.appendChild(page);
-    }
+
     for (i = data.length - 1; i >= 0; i--) {
       let container = document.createElement('div');
       container.setAttribute('class', 'news-div');
@@ -67,6 +58,7 @@ fetch(root_url + `/news`)
   })
   .catch((err) => console.log(err));
 
+// header
 window.addEventListener('scroll', function () {
   const header = document.querySelector('header');
   header.classList.toggle('sticky', window.scrollY > 0);
@@ -77,14 +69,94 @@ function toggle() {
   header.classList.toggle('active');
 }
 
-window.showPage = function (item) {
-  $('.content #news .news-div:not(#item' + item + ')').hide();
-  $('.content #news .news-div#item' + item).show();
-};
+// pagination
 
 $(document).ready(function () {
-  showPage(1);
+  var numOfPage = 5,
+    wrapper = 'content',
+    itemClass = 'news-div',
+    pgID = 'pagination-container',
+    pgClass = 'pgCursor',
+    pgColor = '#fefefe',
+    pgColorActive = '#dfdfdf',
+    pgCustomClass = 'customPagination';
+
+  function paginate() {
+    if ($('#' + pgID).children().length > 8) {
+      var a = $('.activePagination').attr('data-valor');
+      if (a >= 4) {
+        var i = parseInt(a) - 3,
+          o = parseInt(a) + 2;
+        $('.paginacaoValor').hide(),
+          (exibir2 = $('.paginacaoValor').slice(i, o).show());
+      } else
+        $('.paginacaoValor').hide(),
+          (exibir2 = $('.paginacaoValor').slice(0, 5).show());
+    }
+  }
+  paginate(), $('#beforePagination').hide(), $('.' + itemClass).hide();
+  for (
+    var tamanhotabela = $('.' + wrapper).children().length,
+      porPagina = numOfPage,
+      paginas = Math.ceil(tamanhotabela / porPagina),
+      i = 1;
+    i <= paginas;
+
+  )
+    $('#' + pgID).append(
+      "<p class='paginacaoValor " +
+        pgCustomClass +
+        "' data-valor=" +
+        i +
+        '>' +
+        i +
+        '</p>'
+    ),
+      i++,
+      $('.paginacaoValor').hide(),
+      (exibir2 = $('.paginacaoValor').slice(0, 5).show());
+  $('.paginacaoValor:eq(0)')
+    .css('background', '' + pgColorActive)
+    .addClass('activePagination');
+  var exibir = $('.' + itemClass)
+    .slice(0, porPagina)
+    .show();
+  $('.paginacaoValor').on('click', function () {
+    $('.paginacaoValor')
+      .css('background', '' + pgColor)
+      .removeClass('activePagination'),
+      $(this)
+        .css('background', '' + pgColorActive)
+        .addClass('activePagination');
+    var a = $(this).attr('data-valor'),
+      i = a * porPagina,
+      o = i - porPagina;
+    $('.' + itemClass).hide(),
+      (exibir = $('.' + itemClass)
+        .slice(o, i)
+        .show()),
+      '1' === a ? $('#beforePagination').hide() : $('#beforePagination').show(),
+      a === '' + $('.paginacaoValor:last').attr('data-valor')
+        ? $('#afterPagination').hide()
+        : $('#afterPagination').show(),
+      paginate();
+  }),
+    $('.paginacaoValor').last().after($('#afterPagination')),
+    $('#beforePagination').on('click', function () {
+      var a = $('.activePagination').attr('data-valor'),
+        i = parseInt(a) - 1;
+      $('[data-valor=' + i + ']').click(), paginate();
+    }),
+    $('#afterPagination').on('click', function () {
+      var a = $('.activePagination').attr('data-valor'),
+        i = parseInt(a) + 1;
+      $('[data-valor=' + i + ']').click(), paginate();
+    }),
+    $('.paginacaoValor').css('float', 'left'),
+    $('.' + pgClass).css('float', 'left');
 });
+
+// countdown
 
 window.onload = function () {
   countUpFromTime('Mar 11, 2020 12:00:00', 'countfrom');
