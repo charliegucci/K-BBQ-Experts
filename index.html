@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>No-Covid-Here</title>
     <link rel="stylesheet" href="./style.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 
 <body>
@@ -14,7 +15,7 @@
         <a href="#" class="logo"><img src='./img/logo.png' style='width:40%;'></a>
         <ul>
             <li><a href="#home" onclick="toggle()">Home</a></li>
-            <li><a href="#about" onclick="toggle()">About</a></li>
+            <li><a href="#faq" onclick="toggle()">Faq</a></li>
             <li><a href="#services" onclick="toggle()">Services</a></li>
             <li><a href="#currentNews" onclick="toggle()">Current News</a></li>
             <li><a href="#team" onclick="toggle()">Team</a></li>
@@ -29,7 +30,7 @@
     </section>
 
     <!-- About -->
-    <section class="sec" id="about">
+    <!-- <section class="sec" id="about">
         <div class="content">
             <div class="mxw800p">
                 <h3>We don't have it here</h3>
@@ -42,16 +43,21 @@
                 <a href="#" class="btn">Read Stories</a>
             </div>
         </div>
-    </section>
+    </section> -->
+
+
+    
 
     <!-- Current News -->
     <section class="sec" id="currentNews">
         <div class="content">
             <div id="news">
                 <h3>Current News</h3>
+                
                 <!-- work here -->
             </div>
         </div>
+
     </section>
 
     <!-- Services Offer -->
@@ -97,30 +103,22 @@
             </div>
     </section>
     <!-- Stats -->
-    <section class="sec stats">
+    <section class="sec stats" id='faq'>
         <div class="content">
             <div class="mxw800p">
-                <h3>Our Stats</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco.</p>
+                <h3>Since Covid-19 Outbreak</h3>
             </div>
             <div class="statsBox">
-                <div class="box">
-                    <h2>100+</h2>
-                    <h4>News Articles</h4>
-                </div>
-                <div class="box">
-                    <h2>100+</h2>
-                    <h4>Subscribers</h4>
-                </div>
-                <div class="box">
-                    <h2>2</h2>
-                    <h4>News Company</h4>
-                </div>
-                <div class="box">
-                    <h2>0+</h2>
-                    <h4>Awards</h4>
+                <div class="counter" id="countfrom">
+                    <span class="timer days">00</span>
+                    <span class="timer timeRefDays">days</span>
+                    <span class="timer hours">00</span>
+                    <span class="timer timeRefHours">hours</span>
+                    <span class="timer minutes">00</span>
+                    <span class="timer timeRefMinutes">minutes</span>
+                    <span class="timer seconds">00</span>
+                    <span class="timer timeRefSeconds">seconds</span>
+                  </div>
                 </div>
             </div>
         </div>
@@ -188,18 +186,18 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             </div>
             <div class="contactForm">
-                <form>
+                <form action="mailto:kkqexperts@coderacademy.com" method="POST" enctype="text/plain">
                     <div class="row100">
                         <div class="inputBx50">
-                            <input type="text" name="" placeholder="Full Name">
+                            <input type="text" name="name" placeholder="Full Name">
                         </div>
                         <div class="inputBx50">
-                            <input type="text" name="" placeholder="Email Address">
+                            <input type="text" name="mail" placeholder="Email Address">
                         </div>
                     </div>
                     <div class="row100">
                         <div class="inputBx100">
-                            <textarea placeholder="Message"></textarea>
+                            <textarea placeholder="Message" name="message"></textarea>
                         </div>
                     </div>
                     <div class="row100">
@@ -220,7 +218,12 @@
         </div>
     </section>
 
+    
+
+
     <script type="text/javascript" src="./script.js"></script>
 </body>
 
 </html>
+
+
