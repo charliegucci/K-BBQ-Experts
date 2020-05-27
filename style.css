@@ -181,8 +181,7 @@ p {
   margin-top: -250px;
 }
 
-.stats h3,
-.stats p {
+.stats h3 {
   color: #fff;
 }
 
@@ -213,8 +212,8 @@ p {
 .teamBx {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 10px;
   max-width: 100%;
   margin-top: 40px;
 }
@@ -587,9 +586,7 @@ p {
 }
 
 #team {
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
+
   height: 10vh;
   font-family: sans-serif;
   background: #000;
