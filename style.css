@@ -105,7 +105,8 @@ header.sticky ul li a {
 .sec {
   background: #fff;
   padding: 100px;
-  min-height: 100vh;
+  min-height: 70vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -186,8 +187,7 @@ p {
   margin-top: -250px;
 }
 
-.stats h3,
-.stats p {
+.stats h3 {
   color: #fff;
 }
 
@@ -213,47 +213,13 @@ p {
   letter-spacing: 2px;
 }
 
-/* .workBx {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 30px;
-  max-width: 100%;
-  margin-top: 40px;
-} */
 
-/* .workBx .brand {
-  position: relative;
-  background: #4978ff;
-  min-height: 300px;
-  width: 250px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
-/* .workBx .brand:hover {
-  background: #000;
-} */
-
-/* .workBx .brand a {
-  text-decoration: none;
-  color: rgba(255, 255, 255, 0.4);
-  text-transform: uppercase;
-  font-size: 14px;
-  letter-spacing: 2px;
-} */
-
-/* .workBx .brand:hover a {
-  color: rgba(255, 255, 255, 1);
-} */
 
 .teamBx {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 10px;
   max-width: 100%;
   margin-top: 40px;
 }
@@ -282,8 +248,9 @@ p {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 65%;
   object-fit: cover;
+  border-radius: 25%;
 }
 
 .teamBx .member .details {
@@ -623,4 +590,88 @@ p {
 
 #pgx {
   padding: 2rem;
+}
+
+#team {
+
+  height: 10vh;
+  font-family: sans-serif;
+  background: #000;
+  font-size: 3em;
+  font-weight: 500;
+}
+
+h1 span {
+  animation: animate 1s linear infinite;
+}
+
+h1 span:nth-child(5n+1) {
+  animation-delay: 0s;
+}
+
+h1 span:nth-child(5n+2) {
+  animation-delay: 0.2s;
+}
+
+h1 span:nth-child(5n+3) {
+  animation-delay: 0.4s;
+}
+
+h1 span:nth-child(5n+4) {
+  animation-delay: 0.6s;
+}
+
+h1 span:nth-child(5n+5) {
+  animation-delay: 0.8s;
+}
+
+h1 span:nth-child(5n+1) {
+  animation-delay: 0s;
+}
+
+h1 span:nth-child(5n+1) {
+  animation-delay: 0s;
+}
+
+h1 span:nth-child(5n+1) {
+  animation-delay: 0s;
+}
+
+h1 span:nth-child(5n+1) {
+  animation-delay: 0s;
+}
+
+h1 span:nth-child(5n+1) {
+  animation-delay: 0s;
+}
+
+h1 span:nth-child(5n+1) {
+  animation-delay: 0s;
+}
+
+h1 span:nth-child(5n+1) {
+  animation-delay: 0s;
+}
+
+h1 span:nth-child(5n+1) {
+  animation-delay: 0s;
+}
+
+@keyframes animate {
+
+  0%,
+  70% {
+    color: #333;
+    text-shadow: none;
+  }
+
+  100% {
+    color: #fff;
+    text-shadow: 0 0 10px #fff,
+      0 0 20px #fff,
+      0 0 40px #fff,
+      0 0 80px #fff,
+      0 0 120px #fff,
+      0 0 160px #fff;
+  }
 }
