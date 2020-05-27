@@ -3,4 +3,4 @@ GET http://localhost:5000/
 
 
 ### GET news articles
-GET http://localhost:5000/news
+GET http://localhost:5000/scrape
