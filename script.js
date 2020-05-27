@@ -74,13 +74,14 @@ const loadNews = async function () {
         });
         list.appendChild(container);
       }
-      let contentWrapper = document.getElementsByClassName('content')[0];
+      let contentWrapper = document.getElementById('pgx');
       contentWrapper.appendChild(page);
 
       // let count = data.length - 1
     })
     .catch((err) => console.log(err));
 
+  //Pagination
   $(document).ready(function () {
     var numOfPage = 5,
       wrapper = 'content',
@@ -217,4 +218,27 @@ function countUpFromTime(countFrom, id) {
   countUpFromTime.interval = setTimeout(function () {
     countUpFromTime(countFrom, id);
   }, 1000);
+}
+
+// button
+
+const mybutton = document.getElementById('myBtn');
+window.onscroll = function () {
+  scrollFunction();
+};
+
+function scrollFunction() {
+  if (
+    document.body.scrollTop > 1000 ||
+    document.documentElement.scrollTop > 1000
+  ) {
+    mybutton.style.display = 'block';
+  } else {
+    mybutton.style.display = 'none';
+  }
+}
+
+function topFunction() {
+  document.body.scrollTop = 400;
+  document.documentElement.scrollTop = 400;
 }
