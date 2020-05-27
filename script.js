@@ -11,7 +11,10 @@ fetch(root_url + `/news`)
     for (i = 0; i < data.length; i++) {
       let page = document.createElement('a');
       page.setAttribute('href', '#');
-      page.setAttribute('onclick', `showPage(${i + 1} ); return false;`);
+      page.setAttribute(
+        'onclick',
+        `showPage(${data.length - i} ); return false;`
+      );
       page.innerHTML = i + 1 + ' ';
       list.appendChild(page);
     }
