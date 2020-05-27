@@ -96,6 +96,12 @@ header.sticky ul li a {
   color: #dc1a36;
 }
 
+#nocovid{
+  
+  padding:10px;
+  background-color: black;
+}
+
 .sec {
   background: #fff;
   padding: 100px;
@@ -483,6 +489,7 @@ p {
     margin: 10px 0;
     font-size: 20px;
   }
+
 
   header .logo,
   header ul li a {
