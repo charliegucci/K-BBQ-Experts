@@ -537,7 +537,7 @@ p {
   font-family: 'Poppins', sans-serif;
 
 
-  margin: 7rem;
+  margin: 20px;
 }
 
 #news-item {
@@ -567,4 +567,19 @@ p {
   margin-left: 0;
   background: #e8c152;
   color: black;
+}
+
+.customPagination,
+.pgCursor {
+  margin: 5px;
+  padding: 5px 8px;
+  color: #000;
+  background: #dfdfdf;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 600px) {
+  #news {
+    margin: 7rem;
+  }
 }
