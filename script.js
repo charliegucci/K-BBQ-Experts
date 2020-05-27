@@ -40,6 +40,7 @@ const loadNews = async function () {
         // content.style.backgroundColor = 'blue'
         contentEl.style.height = '200px';
         contentEl.style.overflow = 'hidden';
+        contentEl.style.textAlign = "left";
         // let counter = 0;
         for (sentence of data[i].content) {
           contentEl.innerHTML = contentEl.innerHTML + ' ' + sentence;

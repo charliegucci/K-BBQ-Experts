@@ -1,6 +1,22 @@
 ### GET server status
 GET http://localhost:5000/
 
+### GET news articles from db
+GET http://localhost:5000/news
 
-### GET news articles
+
+### GET save news articles by scraping
 GET http://localhost:5000/scrape
+
+
+### PUT like article
+PUT http://localhost:5000/articles/like/5eccc5f7c81c8c355401cde2
+
+### PUT comment 
+PUT http://localhost:5000/articles/comment/5eccc5f7c81c8c355401cde2
+Content-Type: application/json
+
+{
+    "username": "anon813",
+    "comment": "Rain is good regardless of the time of the year! Looking forward to it"
+}
