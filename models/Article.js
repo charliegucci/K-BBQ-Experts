@@ -8,7 +8,7 @@ const ArticleSchema = new mongoose.Schema({
   content: [
     {
       type: String,
-      required: true,
+      // required: true,
     },
   ],
   url: {
@@ -32,6 +32,9 @@ const ArticleSchema = new mongoose.Schema({
   addedOn: {
     type: Date,
     required: true,
+  },
+  from: {
+    type: String,
   },
 });
 

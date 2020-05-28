@@ -721,3 +721,35 @@ h1 span:nth-child(5n + 1) {
   transform: translate(4px, -4px);
   box-shadow: +2px 2px 2px rgba(0, 0, 0, 0.1);
 }
+.top-headlines-wrapper {
+  width: 400px;
+}
+.top-headlines-wrapper h2 {
+  padding: 10px 0;
+}
+.top-news-item {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid lightgrey;
+  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#top-headline-content {
+  max-height: 100vh;
+  overflow: scroll;
+}
+
+.top-news-item:hover {
+  background-color: #f0f0f0;
+}
+
+#category-select {
+  margin-bottom: 20px;
+}
+
+#currentNews {
+  align-items: flex-start;
+}

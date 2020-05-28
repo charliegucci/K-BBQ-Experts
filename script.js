@@ -35,15 +35,16 @@ const loadNews = async function () {
         let headlines = document.createElement('h2');
         headlines.innerHTML = data[i].headline;
         container.appendChild(headlines);
-        
+
         let contentEl = document.createElement('p');
         contentEl.setAttribute('id', `content${i}`);
         // content.style.backgroundColor = 'blue'
         contentEl.style.height = '200px';
         contentEl.style.overflow = 'hidden';
-        contentEl.style.textAlign = "left";
+        contentEl.style.textAlign = 'left';
 
         let dates = document.createElement('h6');
+
         dates.innerHTML =`Posted on ${data[i].addedOn.substring(0,10)}`
         dates.style.marginTop = '10px';
         container.appendChild(dates);
@@ -55,6 +56,12 @@ const loadNews = async function () {
         link.style.fontSize = '10px'
         link.style.color ='black'
         container.appendChild(link);
+
+
+
+        dates.innerHTML = `Posted on ${data[i].addedOn.substring(0, 10)}`;
+        dates.style.margin = '15px';
+        container.appendChild(dates);
 
 
         // let counter = 0;
@@ -96,9 +103,6 @@ const loadNews = async function () {
       let contentWrapper = document.getElementById('pgx');
       contentWrapper.appendChild(page);
 
-
-
-      
 
       // let count = data.length - 1
     })
@@ -265,3 +269,49 @@ function topFunction() {
   document.body.scrollTop = 900;
   document.documentElement.scrollTop = 900;
 }
+
+let topHeadlineDiv = document.querySelector('#top-headline-content');
+
+const getTopHeadlines = (category) => {
+  fetch(root_url + `/top-headlines/${category}`)
+    .then((response) => response.json())
+    .then((news) => {
+      for (article of news) {
+        let articleDiv = document.createElement('div');
+        let linkToArticle = document.createElement('a');
+        linkToArticle.style.textDecoration = 'none';
+        articleDiv.setAttribute('class', 'top-news-item');
+        linkToArticle.setAttribute('href', article.url);
+        linkToArticle.setAttribute('target', 'blank');
+        let title = document.createElement('p');
+        title.style.width = '300px';
+        title.style.fontWeight = '700';
+        title.innerHTML = article.title;
+        articleDiv.appendChild(title);
+        title.style.color = 'black';
+
+        if (article.urlToImage) {
+          let articleImage = document.createElement('img');
+          articleImage.src = article.urlToImage;
+          articleImage.style.width = '100px';
+          articleImage.style.height = '100px';
+          articleImage.style.borderRadius = '15px';
+          articleDiv.appendChild(articleImage);
+        }
+        linkToArticle.appendChild(articleDiv);
+        // linkToArticle.style.borderBottom = 'solid 1px lightgrey'
+        topHeadlineDiv.appendChild(linkToArticle);
+      }
+      console.log(news);
+    });
+};
+
+getTopHeadlines('business');
+
+let categorySelect = document.getElementsByClassName('category-select');
+
+let selectEl = document.querySelector('#top-cat-select');
+selectEl.addEventListener('change', () => {
+  topHeadlineDiv.innerHTML = '';
+  getTopHeadlines(selectEl.value);
+});
