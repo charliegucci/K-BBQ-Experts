@@ -340,13 +340,29 @@ const getTopHeadlines = (category) => {
 
 getTopHeadlines('business');
 
-let categorySelect = document.getElementsByClassName('category-select');
+// let categorySelect = document.getElementsByClassName('category-select');
 
-let selectEl = document.querySelector('#top-cat-select');
-selectEl.addEventListener('change', () => {
-  topHeadlineDiv.innerHTML = '';
-  getTopHeadlines(selectEl.value);
-});
+// let selectEl = document.querySelector('#top-cat-select');
+// selectEl.addEventListener('change', () => {
+//   topHeadlineDiv.innerHTML = '';
+//   getTopHeadlines(selectEl.value);
+// });
+
+let categorySelect = document.getElementsByClassName('option-button')
+
+for (option of categorySelect) {
+
+  let buttonEl = option
+
+  buttonEl.addEventListener('click', () => {
+    topHeadlineDiv.innerHTML = '';
+    console.log(buttonEl.innerHTML.toLowerCase())
+    getTopHeadlines(buttonEl.innerHTML.toLowerCase())
+  })
+
+}
+
+let 
 
 //share
 
