@@ -53,6 +53,9 @@ const loadNews = async function () {
           container.appendChild(breakEl);
         } else {
           let image = document.createElement('img');
+          image.style.height = '150px';
+          image.style.width = 'auto';
+          image.style.paddingTop = '2rem';
           if (data[i].from === 'abc') {
             image.setAttribute(
               'src',
