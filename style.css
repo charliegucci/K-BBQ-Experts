@@ -98,7 +98,7 @@ header.sticky ul li a {
 
 #nocovid {
   padding: 10px;
-  background-color: black;
+  background-color: #1B1B1B;
 }
 
 .sec {
@@ -489,13 +489,13 @@ p {
     margin: 0;
   }
 
-  .sci {
+  /* .sci {
     margin: 20px;
   }
 
   .sci ul li a img {
     font-size: 24px;
-  }
+  } */
 
   h3 {
     font-size: 36px;
@@ -755,4 +755,90 @@ h1 span:nth-child(5n + 1) {
 
 #currentNews {
   align-items: flex-start;
+}
+
+
+/* Share */
+
+.action {
+  position: fixed;
+  bottom: 50px;
+  left: 50px;
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, .1);
+
+}
+
+.action span {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1B1B1B;
+  font-size: 2em;
+  transition: 0.3s ease-in-out;
+}
+
+.action.active span {
+  transform: rotate(135deg);
+}
+
+ul {
+  position: absolute;
+  bottom: 55px;
+  background: #fefefe;
+  border-radius: 20px;
+  min-width: 250px;
+  padding: 20px;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, .1);
+}
+
+.action.active ul {
+  bottom: 70px;
+  visibility: visible;
+  opacity: 1;
+}
+
+ul li {
+  list-style: none;
+  padding: 10px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  transition: 0.3s;
+}
+
+ul li:hover {
+  font-weight: 600;
+  color: #2f2f31;
+}
+
+ul li img {
+  margin-right: 10px;
+  opacity: 0.2;
+  transform: scale(0.8);
+  transition: 0.3s;
+}
+
+ul li:hover img {
+  opacity: 1;
+}
+
+ul li:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.anc {
+  text-decoration: none;
+  color: inherit;
 }
