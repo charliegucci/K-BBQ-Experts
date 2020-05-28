@@ -3,5 +3,5 @@ const router = express.Router();
 const { getArticles } = require('../controllers/news_controllers');
 
 
-router.get("/:country", getArticles)
+router.get("/:category", getArticles)
 module.exports = router;
