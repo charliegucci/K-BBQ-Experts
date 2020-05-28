@@ -5,7 +5,7 @@ const re = new RegExp('(covid\-19|coronavirus|corona|covid)', 'i')
 const getArticles = (req, res) => {
     newsapi.v2.topHeadlines({
         language: 'en',
-        country: req.params.country
+        category: req.params.category
         }).then((data) => {
             let filtered = []
             for (article of data.articles) {

@@ -20,3 +20,7 @@ Content-Type: application/json
     "username": "anon813",
     "comment": "Rain is good regardless of the time of the year! Looking forward to it"
 }
+
+
+### top headlines GET
+GET http://localhost:5000/top-headlines/sport

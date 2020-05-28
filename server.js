@@ -26,6 +26,7 @@ app.use('/auth', require('./routes/auth'));
 app.use('/scrape', require('./routes/scrape'));
 app.use('/news', require('./routes/news'));
 app.use('/articles', require('./routes/article_routes'));
+app.use('/top-headlines', newsRouter)
 
 // Scrapper
 
