@@ -547,7 +547,7 @@ p {
 
 @media screen and (min-width: 600px) {
   #news {
-    margin: 7rem;
+    /* margin: 7rem; */
   }
 
   .sec .content {
@@ -721,12 +721,15 @@ h1 span:nth-child(5n + 1) {
   transform: translate(4px, -4px);
   box-shadow: +2px 2px 2px rgba(0, 0, 0, 0.1);
 }
+
 .top-headlines-wrapper {
   width: 400px;
 }
+
 .top-headlines-wrapper h2 {
   padding: 10px 0;
 }
+
 .top-news-item {
   display: flex;
   flex-direction: row;

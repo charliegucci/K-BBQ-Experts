@@ -36,6 +36,44 @@ const loadNews = async function () {
         headlines.innerHTML = data[i].headline;
         container.appendChild(headlines);
 
+        //image
+        console.log(data[i].image);
+
+        let image = document.createElement('img');
+        image.style.height = '350px';
+        image.style.width = 'auto';
+        image.style.objectFit = 'none';
+        image.style.paddingTop = '2rem';
+        // image.style.alignContent = 'center';
+        if (
+          data[i].image !== 'No Images' &&
+          data[i].image.includes('data:image/gif') === false
+        ) {
+          image.setAttribute('src', data[i].image);
+          container.appendChild(image);
+          let breakEl = document.createElement('br');
+          container.appendChild(breakEl);
+        } else {
+          let image = document.createElement('img');
+          if (data[i].from === 'abc') {
+            image.setAttribute(
+              'src',
+              'https://www.growfree.org.au/wp-content/uploads/2017/05/abc-news-logo-01.png'
+            );
+            container.appendChild(image);
+            let breakEl = document.createElement('br');
+            container.appendChild(breakEl);
+          } else {
+            image.setAttribute(
+              'src',
+              'https://www.news.com.au/wp-content/themes/vip/newscorpau-nca/assets/dist/img/common/favicon/favicon-1024x1024.png'
+            );
+            container.appendChild(image);
+            let breakEl = document.createElement('br');
+            container.appendChild(breakEl);
+          }
+        }
+
         let contentEl = document.createElement('p');
         contentEl.setAttribute('id', `content${i}`);
         // content.style.backgroundColor = 'blue'
@@ -45,7 +83,7 @@ const loadNews = async function () {
 
         let dates = document.createElement('h6');
 
-        dates.innerHTML =`Posted on ${data[i].addedOn.substring(0,10)}`
+        dates.innerHTML = `Posted on ${data[i].addedOn.substring(0, 10)}`;
         dates.style.marginTop = '10px';
         container.appendChild(dates);
 
@@ -53,16 +91,13 @@ const loadNews = async function () {
         link.setAttribute('href', data[i].url);
         link.setAttribute('target', '_blank');
         link.innerHTML = data[i].url;
-        link.style.fontSize = '10px'
-        link.style.color ='black'
+        link.style.fontSize = '10px';
+        link.style.color = 'black';
         container.appendChild(link);
-
-
 
         dates.innerHTML = `Posted on ${data[i].addedOn.substring(0, 10)}`;
         dates.style.margin = '15px';
         container.appendChild(dates);
-
 
         // let counter = 0;
         for (sentence of data[i].content) {
@@ -89,7 +124,6 @@ const loadNews = async function () {
           if (reference.innerHTML == 'Read More') {
             contentEl.style.height = 'auto';
             reference.innerHTML = 'close';
-
           } else {
             contentEl.style.height = '200px';
             reference.innerHTML = 'Read More';
@@ -97,12 +131,9 @@ const loadNews = async function () {
         });
 
         list.appendChild(container);
-
-
       }
       let contentWrapper = document.getElementById('pgx');
       contentWrapper.appendChild(page);
-
 
       // let count = data.length - 1
     })
