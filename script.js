@@ -346,3 +346,10 @@ selectEl.addEventListener('change', () => {
   topHeadlineDiv.innerHTML = '';
   getTopHeadlines(selectEl.value);
 });
+
+//share
+
+function actionToggle() {
+  var action = document.querySelector('.action');
+  action.classList.toggle('active');
+}
