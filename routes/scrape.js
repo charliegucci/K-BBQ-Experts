@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Article = require('../models/Article.js');
-const getNews = require('../scrape');
+const { getNews } = require('../scrape');
 
 router.get('/', async (req, res) => {
   console.log('scraping...');
