@@ -18,6 +18,8 @@ router.get('/', async (req, res) => {
         let articleHeadline = await article.heading;
         let articleContent = await article.content;
         let articleUrl = await article.url;
+        let articleImage = await article.img;
+        let articleSource = await article.from;
         Article.findOne({ url: articleUrl }, (err, article) => {
           if (err) {
             console.log(err);
@@ -31,6 +33,8 @@ router.get('/', async (req, res) => {
               content: articleContent,
               url: articleUrl,
               addedOn: date,
+              image: articleImage,
+              from: articleSource,
             });
             newArticle
               .save()

@@ -1,14 +1,15 @@
 const puppeteer = require('puppeteer');
 const reCovid = new RegExp('(covid-19|coronavirus|corona|covid)', 'i');
 const reImg = new RegExp('(.jpg|.jpeg|.png|)');
-const numAritcle = 20;
+const numAritcle = 15;
+const headTF = true;
 
 async function getNews() {
   const articles = [];
 
   //async function for abc.com.au
   async function headlinesABC() {
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({ headless: headTF });
     const page = await browser.newPage();
     const navigationPromise = page.waitForNavigation();
 
@@ -57,6 +58,7 @@ async function getNews() {
         }
 
         articles.push({
+          from: 'abc',
           heading: await page.$eval('title', (title) => title.innerHTML),
           content: await page.evaluate(() =>
             [...document.querySelectorAll('p')].map((elem) => elem.innerText)
@@ -76,7 +78,7 @@ async function getNews() {
 
   //async function for news.com.au
   async function headlinesNEWS() {
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({ headless: headTF });
     const page = await browser.newPage();
 
     // remove javascript functionality to improve the speed
@@ -107,11 +109,13 @@ async function getNews() {
       );
       if ((await reCovid.test(textsJoined)) === false) {
         articles.push({
+          from: 'news',
           heading: title,
           content: await page.evaluate(() =>
             [...document.querySelectorAll('p')].map((elem) => elem.innerText)
           ),
           url: page.url(),
+          img: 'No Images',
         });
       }
 
@@ -131,10 +135,9 @@ async function getNews() {
 
 module.exports = { getNews };
 
-// getNews().then((data) =>{
-
-//     console.log(data)
-// })
+// getNews().then((data) => {
+//   console.log(data);
+// });
 
 ///////////////////////////////////
 ////Previous Verison///////////////
