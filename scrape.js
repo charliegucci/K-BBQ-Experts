@@ -20,10 +20,10 @@ async function getNews () {
         await page.goto('https://www.abc.net.au/news/justin/')
 
         //removes pagination from the ABC news site
-        for (i = 0; i < 10; i++) {
-            await page.waitForSelector('.GvLLo > .\_27tpe > .\_6TJ0W > .\_3XQNk > .\_1cg3S')
-            await page.click('.GvLLo > .\_27tpe > .\_6TJ0W > .\_3XQNk > .\_1cg3S')
-        }
+        // for (i = 0; i < 10; i++) {
+        //     await page.waitForSelector('.GvLLo > .\_27tpe > .\_6TJ0W > .\_3XQNk > .\_1cg3S')
+        //     await page.click('.GvLLo > .\_27tpe > .\_6TJ0W > .\_3XQNk > .\_1cg3S')
+        // }
         
         for (i = 1; i < numAritcle; i++ ){
 
