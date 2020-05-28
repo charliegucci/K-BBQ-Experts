@@ -42,9 +42,7 @@ const loadNews = async function () {
         let image = document.createElement('img');
         image.style.height = '350px';
         image.style.width = 'auto';
-        image.style.objectFit = 'none';
         image.style.paddingTop = '2rem';
-        // image.style.alignContent = 'center';
         if (
           data[i].image !== 'No Images' &&
           data[i].image.includes('data:image/gif') === false
