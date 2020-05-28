@@ -11,7 +11,7 @@ async function getNews () {
     //async function for abc.com.au
     async function headlinesABC () {
 
-        const browser = await puppeteer.launch({headless:false})
+        const browser = await puppeteer.launch({headless:true})
         const page = await browser.newPage()
         const navigationPromise = page.waitForNavigation()
         
@@ -71,7 +71,7 @@ async function getNews () {
     //async function for news.com.au
     async function headlinesNEWS () {
 
-        const browser = await puppeteer.launch({headless:false})
+        const browser = await puppeteer.launch({headless:true})
         const page = await browser.newPage()
 
         // remove javascript functionality to improve the speed
