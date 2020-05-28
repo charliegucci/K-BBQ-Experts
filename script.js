@@ -48,6 +48,7 @@ const loadNews = async function () {
         dates.style.margin = '15px';
         container.appendChild(dates);
 
+
         // let counter = 0;
         for (sentence of data[i].content) {
           contentEl.innerHTML = contentEl.innerHTML + ' ' + sentence;
@@ -67,10 +68,10 @@ const loadNews = async function () {
         // reference.setAttribute('target', '_blank');
         reference.setAttribute('type', 'button');
 
-        reference.innerHTML = '...Read More';
+        reference.innerHTML = 'Read More';
         container.appendChild(reference);
         reference.addEventListener('click', () => {
-          if (reference.innerHTML == '...Read More') {
+          if (reference.innerHTML == 'Read More') {
             contentEl.style.height = 'auto';
             reference.innerHTML = 'close';
             let link = document.createElement('a');
@@ -78,7 +79,7 @@ const loadNews = async function () {
             link.setAttribute('target', '_blank');
           } else {
             contentEl.style.height = '200px';
-            reference.innerHTML = '...Read More';
+            reference.innerHTML = 'Read More';
           }
         });
         list.appendChild(container);
@@ -250,6 +251,6 @@ function scrollFunction() {
 }
 
 function topFunction() {
-  document.body.scrollTop = 400;
-  document.documentElement.scrollTop = 400;
+  document.body.scrollTop = 900;
+  document.documentElement.scrollTop = 900;
 }
