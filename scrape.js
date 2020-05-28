@@ -119,9 +119,10 @@ async function getNews () {
 
 }
 
-module.exports = { getNews }
+getNews().then((data) =>{
 
-
+    console.log(data)
+})
 
 ///////////////////////////////////
 ////Previous Verison///////////////
