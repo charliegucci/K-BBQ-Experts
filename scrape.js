@@ -3,9 +3,6 @@ const reCovid = new RegExp('(covid\-19|coronavirus|corona|covid)', 'i')
 const reImg = new RegExp('(.jpg|.jpeg|.png|)')
 const numAritcle = 20
 
-async function getNews() {
-  const articles = [];
-
 async function getNews () {
 
     const articles = []
