@@ -35,12 +35,20 @@ const loadNews = async function () {
         let headlines = document.createElement('h2');
         headlines.innerHTML = data[i].headline;
         container.appendChild(headlines);
+        
         let contentEl = document.createElement('p');
         contentEl.setAttribute('id', `content${i}`);
         // content.style.backgroundColor = 'blue'
         contentEl.style.height = '200px';
         contentEl.style.overflow = 'hidden';
-        contentEl.style.textAlign = 'left';
+        contentEl.style.textAlign = "left";
+
+        let dates = document.createElement('h6');
+        dates.innerHTML =`Posted on ${data[i].addedOn.substring(0,10)}`
+        dates.style.margin = '15px';
+        container.appendChild(dates);
+
+
         // let counter = 0;
         for (sentence of data[i].content) {
           contentEl.innerHTML = contentEl.innerHTML + ' ' + sentence;
@@ -52,6 +60,7 @@ const loadNews = async function () {
           }
         }
         container.appendChild(contentEl);
+
         let reference = document.createElement('a');
         reference.setAttribute('id', `read-more-${i}`);
         reference.setAttribute('class', 'expand-btn');
@@ -77,6 +86,8 @@ const loadNews = async function () {
       }
       let contentWrapper = document.getElementById('pgx');
       contentWrapper.appendChild(page);
+
+      
 
       // let count = data.length - 1
     })
