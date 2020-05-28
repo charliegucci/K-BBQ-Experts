@@ -3,6 +3,8 @@ const reCovid = new RegExp('(covid\-19|coronavirus|corona|covid)', 'i')
 const reImg = new RegExp('(.jpg|.jpeg|.png|)')
 const numAritcle = 20
 
+async function getNews() {
+  const articles = [];
 
 async function getNews () {
 
@@ -110,6 +112,35 @@ async function getNews () {
         await browser.close()
         console.log(articles.length)
 
+    for (i = 1; i < 8; i++) {
+      await navigationPromise;
+
+      await page.waitForSelector(
+        `.\_2kqX-:nth-child(${i}) > .\_1E-Sb > .\_38hRP > div > .\_2HoMm > .zT1nT > .MLQqg`
+      );
+      await page.click(
+        `.\_2kqX-:nth-child(${i}) > .\_1E-Sb > .\_38hRP > div > .\_2HoMm > .zT1nT > .MLQqg`
+      );
+      await page.waitForSelector('title');
+      await page.waitForSelector('p');
+      title = await page.$eval('title', (title) => title.innerHTML);
+      const textsJoined = await page.evaluate(() =>
+        [...document.querySelectorAll('p')]
+          .map((elem) => elem.innerText)
+          .join('\n')
+      );
+      if ((await re.test(textsJoined)) === false) {
+        articles.push({
+          heading: title,
+          content: await page.evaluate(() =>
+            [...document.querySelectorAll('p')].map((elem) => elem.innerText)
+          ),
+          url: page.url(),
+        });
+      }
+
+      await navigationPromise;
+      await page.goBack();
     }
 
    await headlinesABC()
