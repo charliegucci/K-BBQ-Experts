@@ -472,15 +472,11 @@ const weatherApiCall = async function (weather, location, api) {
       let iconPhrase = data.DailyForecasts[0].Day.IconPhrase;
 
       let cityDiv = document.createElement('div');
-      cityDiv.style.display = 'flex';
-      cityDiv.style.flexDirection = 'row';
-      cityDiv.style.justifyContent = 'left';
-      cityDiv.style.alignItems = 'center'
+      cityDiv.setAttribute('class', 'weather-item')
 
 
       let cityName = document.createElement('p');
       cityName.innerHTML = location[1];
-      cityName.style.minWidth = '80px'
       let iconImage = document.createElement('img');
       iconImage.setAttribute('src', icon + iconNum + ".svg");
       iconImage.style.width = '50px';
@@ -511,13 +507,13 @@ const weatherApiCall = async function (weather, location, api) {
     }).catch((err) => console.log(err))
 }
 
-weatherApiCall(weather_url, brisbane, api)
-weatherApiCall(weather_url, goldCoast, api)
-weatherApiCall(weather_url, perth, api)
-weatherApiCall(weather_url, sydney, api)
-weatherApiCall(weather_url, melbourne, api)
-weatherApiCall(weather_url, adelaide, api)
-weatherApiCall(weather_url, darwin, api)
+// weatherApiCall(weather_url, brisbane, api)
+// weatherApiCall(weather_url, goldCoast, api)
+// weatherApiCall(weather_url, perth, api)
+// weatherApiCall(weather_url, sydney, api)
+// weatherApiCall(weather_url, melbourne, api)
+// weatherApiCall(weather_url, adelaide, api)
+// weatherApiCall(weather_url, darwin, api)
 
 
 
