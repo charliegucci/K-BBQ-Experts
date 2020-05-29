@@ -871,3 +871,21 @@ ul li:not(:last-child) {
 .user-comments span{
  font-weight: bold;
 }
+
+input, textarea {
+  padding: 5px;
+}
+
+#comment-input {
+  width: 100%;
+  margin-top: 5px;
+  height: 100px;
+}
+
+#username-input {
+  margin-top: 30px;
+}
+
+#comment-content {
+  margin-top: 30px;
+}

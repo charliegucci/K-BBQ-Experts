@@ -138,8 +138,9 @@ const loadNews = async function () {
         // let commentTitle = document.createElement('p')
         // commentTitle.innerHTML = '<strong>Comments</strong>';
         // commentDiv.appendChild(commentTitle);
-        let commentButton = document.createElement('button');
-        commentButton.innerHTML = 'View comments';
+        let commentButton = document.createElement('a');
+        commentButton.setAttribute('type', 'button')
+        commentButton.innerHTML = 'View all comments<br>';
         let breakEl = document.createElement('br');
         commentDiv.appendChild(breakEl);
 
@@ -151,12 +152,15 @@ const loadNews = async function () {
         }
         commentDiv.style.height= '100px';
         commentDiv.style.overflow = 'hidden';
+        commentDiv.setAttribute('id', 'comment-content')
 
 
-        let inputComment = document.createElement('input')
+        let inputComment = document.createElement('textarea')
         let inputUsername = document.createElement('input')
-        inputComment.setAttribute("placeholder", 'comment')
-        inputUsername.setAttribute("placeholder", 'username')
+        inputComment.setAttribute("placeholder", 'Type your comment here')
+        inputComment.setAttribute("id", 'comment-input')
+        inputUsername.setAttribute("placeholder", 'Type a username')
+        inputUsername.setAttribute("id", 'username-input')
         // commentDiv.appendChild(inputUsername)
         inputComment.addEventListener('keyup', (event) => {
 
@@ -189,18 +193,24 @@ const loadNews = async function () {
         })
         // commentDiv.appendChild(inputComment)
         commentButton.addEventListener('click',() =>{
-          if (commentButton.innerHTML == 'View comments') {
+          if (commentButton.innerHTML == 'View all comments<br>') {
             commentDiv.style.height = 'auto';
-            commentButton.innerHTML = 'close';
+            commentButton.innerHTML = 'close<br>';
           } else {
             commentDiv.style.height = '100px';
-            commentButton.innerHTML = 'View comments';
+            commentButton.innerHTML = 'View all comments<br>';
           }
         })
-
-        container.appendChild(commentDiv)
-        container.appendChild(commentButton)
+        if (comments.length > 0) {
+          container.appendChild(commentDiv)
+        }
+        if (comments.length > 2 ) {
+          container.appendChild(commentButton)
+        }
+        let spaceEl = document.createElement('br')
+        container.appendChild(spaceEl)
         container.appendChild(inputUsername)
+        container.appendChild(breakEl)
         container.appendChild(inputComment)
         list.appendChild(container);
       }
