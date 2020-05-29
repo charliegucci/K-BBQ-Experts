@@ -1,5 +1,11 @@
 const root_url = 'https://nocovidhere.herokuapp.com';
 
+const weather_url = 'http://dataservice.accuweather.com/forecasts/v1/daily/1day/'
+const brisbane = '24741'
+const goldCoast = '13978'
+const api = '?apikey=gWJACkbNkGTvPJBxOAkZfy4sxkEo9eU2&metric=true'
+const icon = 'https://www.accuweather.com/images/weathericons/'
+
 const page = document.createElement('div');
 page.setAttribute('id', 'pagination-container');
 const pageNum1 = document.createElement('p');
@@ -184,7 +190,6 @@ const loadNews = async function () {
       // let count = data.length - 1
     })
     .catch((err) => console.log(err));
-
   //Pagination
   $(document).ready(function () {
     var numOfPage = 5,
@@ -197,7 +202,7 @@ const loadNews = async function () {
       pgCustomClass = 'customPagination';
 
     function paginate() {
-      if ($('#' + pgID).children().length > 8) {
+      if ($('#' + pgID).children().length > 5) {
         var a = $('.activePagination').attr('data-valor');
         if (a >= 4) {
           var i = parseInt(a) - 3,
@@ -209,6 +214,8 @@ const loadNews = async function () {
           (exibir2 = $('.paginacaoValor').slice(0, 5).show());
       }
     }
+
+
     paginate(), $('#beforePagination').hide(), $('.' + itemClass).hide();
     for (
       var tamanhotabela = $('.' + wrapper).children().length,
@@ -407,7 +414,7 @@ for (option of categorySelect) {
 
 }
 
-let
+
 
 //share
 
@@ -415,3 +422,15 @@ function actionToggle() {
   var action = document.querySelector('.action');
   action.classList.toggle('active');
 }
+
+// weather
+const weatherApiCall = async function (weather, location, api) {
+  await fetch(weather + location + api)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    }).catch((err) => console.log(err))
+}
+
+weatherApiCall(weather_url, brisbane, api)
+weatherApiCall(weather_url, goldCoast, api)
