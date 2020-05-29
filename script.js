@@ -231,94 +231,52 @@ const loadNews = async function () {
       // let count = data.length - 1
     })
     .catch((err) => console.log(err));
+
+
   //Pagination
+
+
   $(document).ready(function () {
-    var numOfPage = 5,
-      wrapper = 'content',
-      itemClass = 'news-div',
-      pgID = 'pagination-container',
-      pgClass = 'pgCursor',
+
+    var perPage = 5,
+      pgWrapper = 'xxx',
+      pgItems = 'news-div';
+    pgId = 'pagination-container',
+      arrowClass = 'pgCursor',
       pgColor = '#fefefe',
       pgColorActive = '#dfdfdf',
       pgCustomClass = 'customPagination';
 
-    function paginate() {
-      if ($('#' + pgID).children().length > 5) {
-        var a = $('.activePagination').attr('data-valor');
+    function paginationShow() {
+      if ($("#" + pgId).children().length > 8) {
+        var a = $(".activePagination").attr("data-valor");
         if (a >= 4) {
           var i = parseInt(a) - 3,
             o = parseInt(a) + 2;
-          $('.paginacaoValor').hide(),
-            (exibir2 = $('.paginacaoValor').slice(i, o).show());
-        } else
-          $('.paginacaoValor').hide(),
-          (exibir2 = $('.paginacaoValor').slice(0, 5).show());
+          $(".paginacaoValor").hide(), ex2 = $(".paginacaoValor").slice(i, o).show()
+        } else $(".paginacaoValor").hide(), ex2 = $(".paginacaoValor").slice(0, 5).show()
       }
     }
-
-
-    paginate(), $('#beforePagination').hide(), $('.' + itemClass).hide();
-    for (
-      var tamanhotabela = $('.' + wrapper).children().length,
-        porPagina = numOfPage,
-        paginas = Math.ceil(tamanhotabela / porPagina),
-        i = 1; i <= paginas;
-
-    )
-      $('#' + pgID).append(
-        "<p class='paginacaoValor " +
-        pgCustomClass +
-        "' data-valor=" +
-        i +
-        '>' +
-        i +
-        '</p>'
-      ),
-      i++,
-      $('.paginacaoValor').hide(),
-      (exibir2 = $('.paginacaoValor').slice(0, 5).show());
-    $('.paginacaoValor:eq(0)')
-      .css('background', '' + pgColorActive)
-      .addClass('activePagination');
-    var exibir = $('.' + itemClass)
-      .slice(0, porPagina)
-      .show();
-    $('.paginacaoValor').on('click', function () {
-        $('.paginacaoValor')
-          .css('background', '' + pgColor)
-          .removeClass('activePagination'),
-          $(this)
-          .css('background', '' + pgColorActive)
-          .addClass('activePagination');
-        var a = $(this).attr('data-valor'),
-          i = a * porPagina,
-          o = i - porPagina;
-        $('.' + itemClass).hide(),
-          (exibir = $('.' + itemClass)
-            .slice(o, i)
-            .show()),
-          '1' === a ?
-          $('#beforePagination').hide() :
-          $('#beforePagination').show(),
-          a === '' + $('.paginacaoValor:last').attr('data-valor') ?
-          $('#afterPagination').hide() :
-          $('#afterPagination').show(),
-          paginate();
-      }),
-      $('.paginacaoValor').last().after($('#afterPagination')),
-      $('#beforePagination').on('click', function () {
-        var a = $('.activePagination').attr('data-valor'),
-          i = parseInt(a) - 1;
-        $('[data-valor=' + i + ']').click(), paginate();
-      }),
-      $('#afterPagination').on('click', function () {
-        var a = $('.activePagination').attr('data-valor'),
-          i = parseInt(a) + 1;
-        $('[data-valor=' + i + ']').click(), paginate();
-      }),
-      $('.paginacaoValor').css('float', 'left'),
-      $('.' + pgClass).css('float', 'left');
-  });
+    paginationShow(), $("#beforePagination").hide(), $("." + pgItems).hide();
+    for (var abc = $("." + pgWrapper).children().length, perPage = perPage, page = Math.ceil(abc / perPage), i = 1; i <= page;) $("#" + pgId).append("<p class='paginacaoValor " + pgCustomClass + "' data-valor=" + i + ">" + i + "</p>"), i++, $(".paginacaoValor").hide(), ex2 = $(".paginacaoValor").slice(0, 5).show();
+    $(".paginacaoValor:eq(0)").css("background", "" + pgColorActive).addClass("activePagination");
+    var ex = $("." + pgItems).slice(0, perPage).show();
+    $(".paginacaoValor").on("click", function () {
+      $(".paginacaoValor").css("background", "" + pgColor).removeClass("activePagination"), $(this).css("background", "" + pgColorActive).addClass("activePagination");
+      var a = $(this).attr("data-valor"),
+        i = a * perPage,
+        o = i - perPage;
+      $("." + pgItems).hide(), ex = $("." + pgItems).slice(o, i).show(), "1" === a ? $("#beforePagination").hide() : $("#beforePagination").show(), a === "" + $(".paginacaoValor:last").attr("data-valor") ? $("#afterPagination").hide() : $("#afterPagination").show(), paginationShow()
+    }), $(".paginacaoValor").last().after($("#afterPagination")), $("#beforePagination").on("click", function () {
+      var a = $(".activePagination").attr("data-valor"),
+        i = parseInt(a) - 1;
+      $("[data-valor=" + i + "]").click(), paginationShow()
+    }), $("#afterPagination").on("click", function () {
+      var a = $(".activePagination").attr("data-valor"),
+        i = parseInt(a) + 1;
+      $("[data-valor=" + i + "]").click(), paginationShow()
+    }), $(".paginacaoValor").css("float", "left"), $("." + arrowClass).css("float", "left");
+  })
 };
 
 loadNews();
@@ -464,59 +422,59 @@ function actionToggle() {
 
 // weather
 const weatherApiCall = async function (weather, location, api) {
-  await fetch(weather + location[0] + api)
-    .then((response) => response.json())
-    .then((data) => {
-      let minTemp = data.DailyForecasts[0].Temperature.Minimum.Value;
-      let maxTemp = data.DailyForecasts[0].Temperature.Maximum.Value;
-      let iconNum = data.DailyForecasts[0].Day.Icon;
-      let iconPhrase = data.DailyForecasts[0].Day.IconPhrase;
+    await fetch(weather + location[0] + api)
+      .then((response) => response.json())
+      .then((data) => {
+        let minTemp = data.DailyForecasts[0].Temperature.Minimum.Value;
+        let maxTemp = data.DailyForecasts[0].Temperature.Maximum.Value;
+        let iconNum = data.DailyForecasts[0].Day.Icon;
+        let iconPhrase = data.DailyForecasts[0].Day.IconPhrase;
 
-      let cityDiv = document.createElement('div');
-      cityDiv.setAttribute('class', 'weather-item')
-
-
-      let cityName = document.createElement('p');
-      cityName.innerHTML = location[1];
-      let iconImage = document.createElement('img');
-      iconImage.setAttribute('src', icon + iconNum + ".svg");
-      iconImage.style.width = '50px';
-      iconImage.style.heigth = '50px';
-      let maxTempDisplay = document.createElement('p');
-      maxTempDisplay.innerHTML = maxTemp
-      maxTempDisplay.style.fontWeight = 'bold';
-      // maxTempDisplay.style.fontSize = '20px'
-      let minTempDisplay = document.createElement('p');
-      minTempDisplay.innerHTML = `/ ${minTemp}`;
-      let weatherPhrase = document.createElement('p');
-      weatherPhrase.innerHTML = iconPhrase;
-      weatherPhrase.style.paddingLeft = '20px'
+        let cityDiv = document.createElement('div');
+        cityDiv.setAttribute('class', 'weather-item')
 
 
-      cityDiv.appendChild(cityName);
-      cityDiv.appendChild(iconImage);
-      cityDiv.appendChild(maxTempDisplay);
-      cityDiv.appendChild(minTempDisplay);
-      cityDiv.appendChild(weatherPhrase);
+        let cityName = document.createElement('p');
+        cityName.innerHTML = location[1];
+        let iconImage = document.createElement('img');
+        iconImage.setAttribute('src', icon + iconNum + ".svg");
+        iconImage.style.width = '50px';
+        iconImage.style.heigth = '50px';
+        let maxTempDisplay = document.createElement('p');
+        maxTempDisplay.innerHTML = maxTemp
+        maxTempDisplay.style.fontWeight = 'bold';
+        // maxTempDisplay.style.fontSize = '20px'
+        let minTempDisplay = document.createElement('p');
+        minTempDisplay.innerHTML = `/ ${minTemp}`;
+        let weatherPhrase = document.createElement('p');
+        weatherPhrase.innerHTML = iconPhrase;
+        weatherPhrase.style.paddingLeft = '20px'
+
+
+        cityDiv.appendChild(cityName);
+        cityDiv.appendChild(iconImage);
+        cityDiv.appendChild(maxTempDisplay);
+        cityDiv.appendChild(minTempDisplay);
+        cityDiv.appendChild(weatherPhrase);
 
 
 
-      let weatherContent = document.getElementById('top-weather-content');
-      weatherContent.appendChild(cityDiv);
+        let weatherContent = document.getElementById('top-weather-content');
+        weatherContent.appendChild(cityDiv);
 
 
-    }).catch((err) => console.log(err))
-}
+      }).catch((err) => console.log(err))
+  }
 
-// weatherApiCall(weather_url, brisbane, api)
-// weatherApiCall(weather_url, goldCoast, api)
-// weatherApiCall(weather_url, perth, api)
-// weatherApiCall(weather_url, sydney, api)
-// weatherApiCall(weather_url, melbourne, api)
-// weatherApiCall(weather_url, adelaide, api)
-// weatherApiCall(weather_url, darwin, api)
+  // weatherApiCall(weather_url, brisbane, api)
+  // weatherApiCall(weather_url, goldCoast, api)
+  // weatherApiCall(weather_url, perth, api)
+  // weatherApiCall(weather_url, sydney, api)
+  // weatherApiCall(weather_url, melbourne, api)
+  // weatherApiCall(weather_url, adelaide, api)
+  // weatherApiCall(weather_url, darwin, api)
 
-
+  //robojeb
   ! function (t, e) {
     t.artibotApi = {
       l: [],
