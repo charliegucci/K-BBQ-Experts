@@ -1,6 +1,6 @@
 const root_url = 'https://nocovidhere.herokuapp.com';
 
-const weather_url = 'http://dataservice.accuweather.com/forecasts/v1/daily/1day/'
+const weather_url = 'https://dataservice.accuweather.com/forecasts/v1/daily/1day/'
 const brisbane = ['24741', 'Brisbane']
 const goldCoast = ['13978', 'Gold Coast']
 const perth = ['26797', 'Perth']
@@ -169,9 +169,9 @@ const loadNews = async function () {
         let inputComment = document.createElement('textarea')
         let inputUsername = document.createElement('input')
         inputComment.setAttribute("placeholder", 'Type your comment here')
-        inputComment.setAttribute("id", 'comment-input')
+        inputComment.setAttribute("class", 'comment-input')
         inputUsername.setAttribute("placeholder", 'Type a username')
-        inputUsername.setAttribute("id", 'username-input')
+        inputUsername.setAttribute("class", 'username-input')
         // commentDiv.appendChild(inputUsername)
         inputComment.addEventListener('keyup', (event) => {
 
@@ -473,15 +473,11 @@ const weatherApiCall = async function (weather, location, api) {
       let iconPhrase = data.DailyForecasts[0].Day.IconPhrase;
 
       let cityDiv = document.createElement('div');
-      cityDiv.style.display = 'flex';
-      cityDiv.style.flexDirection = 'row';
-      cityDiv.style.justifyContent = 'left';
-      cityDiv.style.alignItems = 'center'
+      cityDiv.setAttribute('class', 'weather-item')
 
 
       let cityName = document.createElement('p');
       cityName.innerHTML = location[1];
-      cityName.style.minWidth = '80px'
       let iconImage = document.createElement('img');
       iconImage.setAttribute('src', icon + iconNum + ".svg");
       iconImage.style.width = '50px';
@@ -512,13 +508,13 @@ const weatherApiCall = async function (weather, location, api) {
     }).catch((err) => console.log(err))
 }
 
-weatherApiCall(weather_url, brisbane, api)
-weatherApiCall(weather_url, goldCoast, api)
-weatherApiCall(weather_url, perth, api)
-weatherApiCall(weather_url, sydney, api)
-weatherApiCall(weather_url, melbourne, api)
-weatherApiCall(weather_url, adelaide, api)
-weatherApiCall(weather_url, darwin, api)
+// weatherApiCall(weather_url, brisbane, api)
+// weatherApiCall(weather_url, goldCoast, api)
+// weatherApiCall(weather_url, perth, api)
+// weatherApiCall(weather_url, sydney, api)
+// weatherApiCall(weather_url, melbourne, api)
+// weatherApiCall(weather_url, adelaide, api)
+// weatherApiCall(weather_url, darwin, api)
 
 
   ! function (t, e) {

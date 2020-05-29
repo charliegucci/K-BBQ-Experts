@@ -878,16 +878,32 @@ textarea {
   padding: 5px;
 }
 
-#comment-input {
+.comment-input {
   width: 100%;
   margin-top: 5px;
   height: 100px;
 }
 
-#username-input {
+.username-input {
   margin-top: 30px;
 }
 
 #comment-content {
   margin-top: 30px;
+}
+
+#top-weather-content h4 {
+  margin-top: 10vh;
+  margin-bottom: 20px;
+}
+
+#top-weather-content p:first-child {
+  min-width: 100px;
+}
+
+
+.weather-item {
+  display: flex;
+  flex-direction: row;
+
 }
