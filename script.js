@@ -1,8 +1,13 @@
 const root_url = 'https://nocovidhere.herokuapp.com';
 
 const weather_url = 'http://dataservice.accuweather.com/forecasts/v1/daily/1day/'
-const brisbane = '24741'
-const goldCoast = '13978'
+const brisbane = ['24741', 'Brisbane']
+const goldCoast = ['13978','Gold Coast']
+const perth = ['26797', 'Perth']
+const sydney = ['22889', 'Sydney']
+const melbourne = ['26216', 'Melbourne']
+const adelaide = ['25257', 'Adelaide']
+const darwin = ['13718', 'Darwin']
 const api = '?apikey=gWJACkbNkGTvPJBxOAkZfy4sxkEo9eU2&metric=true'
 const icon = 'https://www.accuweather.com/images/weathericons/'
 
@@ -450,8 +455,6 @@ for (option of categorySelect) {
 
 }
 
-
-
 //share
 
 function actionToggle() {
@@ -461,12 +464,62 @@ function actionToggle() {
 
 // weather
 const weatherApiCall = async function (weather, location, api) {
-  await fetch(weather + location + api)
+  await fetch(weather + location[0] + api)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      let minTemp = data.DailyForecasts[0].Temperature.Minimum.Value;
+      let maxTemp = data.DailyForecasts[0].Temperature.Maximum.Value;
+      let iconNum = data.DailyForecasts[0].Day.Icon;
+      let iconPhrase = data.DailyForecasts[0].Day.IconPhrase;
+
+      let cityDiv = document.createElement('div');
+      cityDiv.style.display = 'flex';
+      cityDiv.style.flexDirection = 'row';
+      cityDiv.style.justifyContent = 'left';
+      cityDiv.style.alignItems = 'center'
+
+
+      let cityName = document.createElement('p');
+      cityName.innerHTML = location[1];
+      cityName.style.minWidth = '80px'
+      let iconImage = document.createElement('img');
+      iconImage.setAttribute('src', icon + iconNum + ".svg");
+      iconImage.style.width = '50px';
+      iconImage.style.heigth = '50px';
+      let maxTempDisplay = document.createElement('p');
+      maxTempDisplay.innerHTML = maxTemp
+      maxTempDisplay.style.fontWeight = 'bold';
+      // maxTempDisplay.style.fontSize = '20px'
+      let minTempDisplay = document.createElement('p');
+      minTempDisplay.innerHTML = `/ ${minTemp}`;
+      let weatherPhrase = document.createElement('p');
+      weatherPhrase.innerHTML = iconPhrase;
+      weatherPhrase.style.paddingLeft = '20px'
+
+
+      cityDiv.appendChild(cityName);
+      cityDiv.appendChild(iconImage);
+      cityDiv.appendChild(maxTempDisplay);
+      cityDiv.appendChild(minTempDisplay);
+      cityDiv.appendChild(weatherPhrase);
+
+
+
+      let weatherContent = document.getElementById('top-weather-content');
+      weatherContent.appendChild(cityDiv);
+
+
     }).catch((err) => console.log(err))
 }
 
 weatherApiCall(weather_url, brisbane, api)
 weatherApiCall(weather_url, goldCoast, api)
+weatherApiCall(weather_url, perth, api)
+weatherApiCall(weather_url, sydney, api)
+weatherApiCall(weather_url, melbourne, api)
+weatherApiCall(weather_url, adelaide, api)
+weatherApiCall(weather_url, darwin, api)
+
+
+
+
