@@ -2,7 +2,7 @@ const root_url = 'https://nocovidhere.herokuapp.com';
 
 const weather_url = 'http://dataservice.accuweather.com/forecasts/v1/daily/1day/'
 const brisbane = ['24741', 'Brisbane']
-const goldCoast = ['13978','Gold Coast']
+const goldCoast = ['13978', 'Gold Coast']
 const perth = ['26797', 'Perth']
 const sydney = ['22889', 'Sydney']
 const melbourne = ['26216', 'Melbourne']
@@ -157,11 +157,11 @@ const loadNews = async function () {
 
         for (comment of comments) {
           let listComment = document.createElement('p');
-          listComment.setAttribute('class','user-comments');
+          listComment.setAttribute('class', 'user-comments');
           listComment.innerHTML = `<span>${comment.username}</span>: ${comment.comment}`;
-          commentDiv.appendChild(listComment); 
+          commentDiv.appendChild(listComment);
         }
-        commentDiv.style.height= '100px';
+        commentDiv.style.height = '100px';
         commentDiv.style.overflow = 'hidden';
         commentDiv.setAttribute('id', 'comment-content')
 
@@ -192,9 +192,9 @@ const loadNews = async function () {
               }).then((response) => response.json())
               .then((article) => {
                 let listComment = document.createElement('p')
-                listComment.setAttribute('id','user-comments')
+                listComment.setAttribute('id', 'user-comments')
                 listComment.innerHTML = `${data.username}: ${data.comment}`
-                listComment.setAttribute('class','user-comments')
+                listComment.setAttribute('class', 'user-comments')
                 commentDiv.appendChild(listComment)
               })
               .catch((err) => console.log(err))
@@ -203,7 +203,7 @@ const loadNews = async function () {
           }
         })
         // commentDiv.appendChild(inputComment)
-        commentButton.addEventListener('click',() =>{
+        commentButton.addEventListener('click', () => {
           if (commentButton.innerHTML == 'View all comments<br>') {
             commentDiv.style.height = 'auto';
             commentButton.innerHTML = 'close<br>';
@@ -215,7 +215,7 @@ const loadNews = async function () {
         if (comments.length > 0) {
           container.appendChild(commentDiv)
         }
-        if (comments.length > 2 ) {
+        if (comments.length > 2) {
           container.appendChild(commentButton)
         }
         let spaceEl = document.createElement('br')
@@ -521,5 +521,25 @@ weatherApiCall(weather_url, adelaide, api)
 weatherApiCall(weather_url, darwin, api)
 
 
-
-
+  ! function (t, e) {
+    t.artibotApi = {
+      l: [],
+      t: [],
+      on: function () {
+        this.l.push(arguments)
+      },
+      trigger: function () {
+        this.t.push(arguments)
+      }
+    };
+    var a = !1,
+      i = e.createElement("script");
+    i.async = !0, i.type = "text/javascript", i.src = "https://app.artibot.ai/loader.js", e.getElementsByTagName("head").item(0).appendChild(i), i.onreadystatechange = i.onload = function () {
+      if (!(a || this.readyState && "loaded" != this.readyState && "complete" != this.readyState)) {
+        new window.ArtiBot({
+          i: "d156dc30-98a2-4cd2-a5f8-969fdcd86fae"
+        });
+        a = !0
+      }
+    }
+  }(window, document);
