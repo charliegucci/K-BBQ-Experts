@@ -856,3 +856,18 @@ ul li:not(:last-child) {
   background-color: black;
   color: white;
 }
+
+.user-comments {
+  box-sizing: border-box;
+  border-radius: 20px;
+  background-color: white;
+  text-align: left;
+  padding-left: 20px;
+  padding-top:3px;
+  padding-bottom:3px;
+
+}
+
+.user-comments span{
+ font-weight: bold;
+}
