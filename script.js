@@ -37,7 +37,7 @@ const loadNews = async function () {
         container.appendChild(headlines);
 
         //image
-        console.log(data[i].image);
+        // console.log(data[i].image);
 
         let image = document.createElement('img');
         image.style.height = '350px';
@@ -130,7 +130,52 @@ const loadNews = async function () {
             reference.innerHTML = 'Read More';
           }
         });
+        //comment
 
+        let comments = data[i].comments
+        let articleId = data[i]._id
+        let commentDiv = document.createElement('div')
+        for (comment of comments) {
+          let listComment = document.createElement('p')
+          listComment.innerHTML = `${comment.username}: ${comment.comment}`
+          commentDiv.appendChild(listComment)
+        }
+        let inputComment = document.createElement('input')
+        let inputUsername = document.createElement('input')
+        inputComment.setAttribute("placeholder", 'comment')
+        inputUsername.setAttribute("placeholder", 'username')
+        // commentDiv.appendChild(inputUsername)
+        inputComment.addEventListener('keyup', (event) => {
+
+          // http://localhost:5000/articles/comment/5eccc5f7c81c8c355401cde2?
+          if (event.key === 'Enter') {
+            const data = {
+              username: inputUsername.value,
+              comment: inputComment.value
+            }
+            console.log(inputComment.value)
+            fetch(root_url + `/articles/comment/${articleId}`, {
+                method: 'put',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+
+              }).then((response) => response.json())
+              .then((article) => {
+                let listComment = document.createElement('p')
+                listComment.innerHTML = `${data.username}: ${data.comment}`
+                commentDiv.appendChild(listComment)
+              })
+              .catch((err) => console.log(err))
+            inputComment.value = ''
+            inputUsername.value = ''
+          }
+        })
+        // commentDiv.appendChild(inputComment)
+        container.appendChild(commentDiv)
+        container.appendChild(inputUsername)
+        container.appendChild(inputComment)
         list.appendChild(container);
       }
       let contentWrapper = document.getElementById('pgx');
@@ -161,7 +206,7 @@ const loadNews = async function () {
             (exibir2 = $('.paginacaoValor').slice(i, o).show());
         } else
           $('.paginacaoValor').hide(),
-            (exibir2 = $('.paginacaoValor').slice(0, 5).show());
+          (exibir2 = $('.paginacaoValor').slice(0, 5).show());
       }
     }
     paginate(), $('#beforePagination').hide(), $('.' + itemClass).hide();
@@ -169,22 +214,21 @@ const loadNews = async function () {
       var tamanhotabela = $('.' + wrapper).children().length,
         porPagina = numOfPage,
         paginas = Math.ceil(tamanhotabela / porPagina),
-        i = 1;
-      i <= paginas;
+        i = 1; i <= paginas;
 
     )
       $('#' + pgID).append(
         "<p class='paginacaoValor " +
-          pgCustomClass +
-          "' data-valor=" +
-          i +
-          '>' +
-          i +
-          '</p>'
+        pgCustomClass +
+        "' data-valor=" +
+        i +
+        '>' +
+        i +
+        '</p>'
       ),
-        i++,
-        $('.paginacaoValor').hide(),
-        (exibir2 = $('.paginacaoValor').slice(0, 5).show());
+      i++,
+      $('.paginacaoValor').hide(),
+      (exibir2 = $('.paginacaoValor').slice(0, 5).show());
     $('.paginacaoValor:eq(0)')
       .css('background', '' + pgColorActive)
       .addClass('activePagination');
@@ -192,27 +236,27 @@ const loadNews = async function () {
       .slice(0, porPagina)
       .show();
     $('.paginacaoValor').on('click', function () {
-      $('.paginacaoValor')
-        .css('background', '' + pgColor)
-        .removeClass('activePagination'),
-        $(this)
+        $('.paginacaoValor')
+          .css('background', '' + pgColor)
+          .removeClass('activePagination'),
+          $(this)
           .css('background', '' + pgColorActive)
           .addClass('activePagination');
-      var a = $(this).attr('data-valor'),
-        i = a * porPagina,
-        o = i - porPagina;
-      $('.' + itemClass).hide(),
-        (exibir = $('.' + itemClass)
-          .slice(o, i)
-          .show()),
-        '1' === a
-          ? $('#beforePagination').hide()
-          : $('#beforePagination').show(),
-        a === '' + $('.paginacaoValor:last').attr('data-valor')
-          ? $('#afterPagination').hide()
-          : $('#afterPagination').show(),
-        paginate();
-    }),
+        var a = $(this).attr('data-valor'),
+          i = a * porPagina,
+          o = i - porPagina;
+        $('.' + itemClass).hide(),
+          (exibir = $('.' + itemClass)
+            .slice(o, i)
+            .show()),
+          '1' === a ?
+          $('#beforePagination').hide() :
+          $('#beforePagination').show(),
+          a === '' + $('.paginacaoValor:last').attr('data-valor') ?
+          $('#afterPagination').hide() :
+          $('#afterPagination').show(),
+          paginate();
+      }),
       $('.paginacaoValor').last().after($('#afterPagination')),
       $('#beforePagination').on('click', function () {
         var a = $('.activePagination').attr('data-valor'),
@@ -247,6 +291,7 @@ function toggle() {
 window.onload = function () {
   countUpFromTime('Mar 11, 2020 12:00:00', 'countfrom');
 };
+
 function countUpFromTime(countFrom, id) {
   countFrom = new Date(countFrom).getTime();
   var now = new Date(),
@@ -264,7 +309,7 @@ function countUpFromTime(countFrom, id) {
   secs = Math.floor(
     ((((timeDifference % secondsInADay) % secondsInAHour) % (60 * 1000)) /
       1000) *
-      1
+    1
   );
 
   var idEl = document.getElementById(id);
@@ -362,7 +407,7 @@ for (option of categorySelect) {
 
 }
 
-let 
+let
 
 //share
 
