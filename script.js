@@ -169,9 +169,9 @@ const loadNews = async function () {
         let inputComment = document.createElement('textarea')
         let inputUsername = document.createElement('input')
         inputComment.setAttribute("placeholder", 'Type your comment here')
-        inputComment.setAttribute("id", 'comment-input')
+        inputComment.setAttribute("class", 'comment-input')
         inputUsername.setAttribute("placeholder", 'Type a username')
-        inputUsername.setAttribute("id", 'username-input')
+        inputUsername.setAttribute("class", 'username-input')
         // commentDiv.appendChild(inputUsername)
         inputComment.addEventListener('keyup', (event) => {
 
@@ -192,7 +192,6 @@ const loadNews = async function () {
               }).then((response) => response.json())
               .then((article) => {
                 let listComment = document.createElement('p')
-                listComment.setAttribute('id','user-comments')
                 listComment.innerHTML = `${data.username}: ${data.comment}`
                 listComment.setAttribute('class','user-comments')
                 commentDiv.appendChild(listComment)
