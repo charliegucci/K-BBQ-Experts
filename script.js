@@ -1,6 +1,6 @@
 const root_url = 'https://nocovidhere.herokuapp.com';
 
-const weather_url = 'http://dataservice.accuweather.com/forecasts/v1/daily/1day/'
+const weather_url = 'https://dataservice.accuweather.com/forecasts/v1/daily/1day/'
 const brisbane = ['24741', 'Brisbane']
 const goldCoast = ['13978','Gold Coast']
 const perth = ['26797', 'Perth']
