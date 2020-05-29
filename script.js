@@ -135,11 +135,24 @@ const loadNews = async function () {
         let comments = data[i].comments
         let articleId = data[i]._id
         let commentDiv = document.createElement('div')
+        // let commentTitle = document.createElement('p')
+        // commentTitle.innerHTML = '<strong>Comments</strong>';
+        // commentDiv.appendChild(commentTitle);
+        let commentButton = document.createElement('button');
+        commentButton.innerHTML = 'View comments';
+        let breakEl = document.createElement('br');
+        commentDiv.appendChild(breakEl);
+
         for (comment of comments) {
-          let listComment = document.createElement('p')
-          listComment.innerHTML = `${comment.username}: ${comment.comment}`
-          commentDiv.appendChild(listComment)
+          let listComment = document.createElement('p');
+          listComment.setAttribute('class','user-comments');
+          listComment.innerHTML = `<span>${comment.username}</span>: ${comment.comment}`;
+          commentDiv.appendChild(listComment); 
         }
+        commentDiv.style.height= '100px';
+        commentDiv.style.overflow = 'hidden';
+
+
         let inputComment = document.createElement('input')
         let inputUsername = document.createElement('input')
         inputComment.setAttribute("placeholder", 'comment')
@@ -164,7 +177,9 @@ const loadNews = async function () {
               }).then((response) => response.json())
               .then((article) => {
                 let listComment = document.createElement('p')
+                listComment.setAttribute('id','user-comments')
                 listComment.innerHTML = `${data.username}: ${data.comment}`
+                listComment.setAttribute('class','user-comments')
                 commentDiv.appendChild(listComment)
               })
               .catch((err) => console.log(err))
@@ -173,7 +188,18 @@ const loadNews = async function () {
           }
         })
         // commentDiv.appendChild(inputComment)
+        commentButton.addEventListener('click',() =>{
+          if (commentButton.innerHTML == 'View comments') {
+            commentDiv.style.height = 'auto';
+            commentButton.innerHTML = 'close';
+          } else {
+            commentDiv.style.height = '100px';
+            commentButton.innerHTML = 'View comments';
+          }
+        })
+
         container.appendChild(commentDiv)
+        container.appendChild(commentButton)
         container.appendChild(inputUsername)
         container.appendChild(inputComment)
         list.appendChild(container);
