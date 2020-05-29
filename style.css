@@ -790,7 +790,7 @@ h1 span:nth-child(5n + 1) {
   transform: rotate(135deg);
 }
 
-ul {
+.social {
   position: absolute;
   bottom: 55px;
   background: #fefefe;
@@ -809,7 +809,7 @@ ul {
   opacity: 1;
 }
 
-ul li {
+.social li {
   list-style: none;
   padding: 10px 0;
   display: flex;
@@ -818,23 +818,23 @@ ul li {
   transition: 0.3s;
 }
 
-ul li:hover {
+.social li:hover {
   font-weight: 600;
   color: #2f2f31;
 }
 
-ul li img {
+.social li img {
   margin-right: 10px;
   opacity: 0.2;
   transform: scale(0.8);
   transition: 0.3s;
 }
 
-ul li:hover img {
+.social li:hover img {
   opacity: 1;
 }
 
-ul li:not(:last-child) {
+.social li:not(:last-child) {
   border-bottom: 1px solid rgba(0, 0, 0, .1);
 }
 
@@ -851,6 +851,7 @@ ul li:not(:last-child) {
   background-color: white;
   color: black;
 }
+
 .option-button:focus {
   outline: 0;
   background-color: black;
@@ -863,16 +864,17 @@ ul li:not(:last-child) {
   background-color: white;
   text-align: left;
   padding-left: 20px;
-  padding-top:3px;
-  padding-bottom:3px;
+  padding-top: 3px;
+  padding-bottom: 3px;
 
 }
 
-.user-comments span{
- font-weight: bold;
+.user-comments span {
+  font-weight: bold;
 }
 
-input, textarea {
+input,
+textarea {
   padding: 5px;
 }
 
