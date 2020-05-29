@@ -40,9 +40,10 @@ const loadNews = async function () {
         container.setAttribute('id', `item${i + 1}`);
         container.style.padding = '3rem';
         container.style.wordWrap = 'break-word';
-        container.style.border = 'thin solid #000';
+        // container.style.border = 'thin solid #000';
+        container.style.borderBottom = 'solid 1px lightgrey'
         container.style.margin = ' 2rem 1rem';
-        container.style.backgroundColor = '#dfdfdf';
+        // container.style.backgroundColor = '#dfdfdf';
         let headlines = document.createElement('h2');
         headlines.innerHTML = data[i].headline;
         container.appendChild(headlines);
@@ -92,6 +93,7 @@ const loadNews = async function () {
         contentEl.style.height = '200px';
         contentEl.style.overflow = 'hidden';
         contentEl.style.textAlign = 'left';
+        // contentEl.style.borderBottom = '1px solid lightgrey'
 
         let dates = document.createElement('h6');
 

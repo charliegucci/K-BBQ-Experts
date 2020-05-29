@@ -667,7 +667,7 @@ h1 span:nth-child(5n + 1) {
   opacity: 1;
   position: relative;
   padding: 10px 10px 10px 20px;
-  color: #feffff;
+  color: black;
   font-size: 15px;
   font-family: sans-serif;
   text-decoration: none;
@@ -680,7 +680,8 @@ h1 span:nth-child(5n + 1) {
 }
 
 .expand-btn:hover {
-  background: #2b7a78;
+  background: #3b3b3b;
+  color: white;
   box-shadow: -30px 30px 50px rgba(0, 0, 0, 0.4);
 }
 
@@ -859,14 +860,14 @@ h1 span:nth-child(5n + 1) {
 }
 
 .user-comments {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   border-radius: 20px;
   background-color: white;
   text-align: left;
   padding-left: 20px;
   padding-top: 3px;
   padding-bottom: 3px;
-
+  max-width: auto !important;
 }
 
 .user-comments span {
