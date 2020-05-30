@@ -8,7 +8,7 @@ const sydney = ['22889', 'Sydney']
 const melbourne = ['26216', 'Melbourne']
 const adelaide = ['25257', 'Adelaide']
 const darwin = ['13718', 'Darwin']
-const api = '?apikey=gWJACkbNkGTvPJBxOAkZfy4sxkEo9eU2&metric=true'
+const api = '?apikey=yxnvCofyk65LhE6NzsCGpnCoVHcDVsh7&metric=true'
 const icon = 'https://www.accuweather.com/images/weathericons/'
 
 let filteredWords = []
@@ -466,13 +466,13 @@ const weatherApiCall = async function (weather, location, api) {
       }).catch((err) => console.log(err))
   }
 
-  // weatherApiCall(weather_url, brisbane, api)
-  // weatherApiCall(weather_url, goldCoast, api)
-  // weatherApiCall(weather_url, perth, api)
-  // weatherApiCall(weather_url, sydney, api)
-  // weatherApiCall(weather_url, melbourne, api)
-  // weatherApiCall(weather_url, adelaide, api)
-  // weatherApiCall(weather_url, darwin, api)
+  weatherApiCall(weather_url, brisbane, api)
+  weatherApiCall(weather_url, goldCoast, api)
+  weatherApiCall(weather_url, perth, api)
+  weatherApiCall(weather_url, sydney, api)
+  weatherApiCall(weather_url, melbourne, api)
+  weatherApiCall(weather_url, adelaide, api)
+  weatherApiCall(weather_url, darwin, api)
 
   //robojeb
   ! function (t, e) {

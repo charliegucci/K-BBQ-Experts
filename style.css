@@ -948,3 +948,7 @@ textarea {
   background-position-x: 97%;
   box-shadow: 0 0 10px 0 #7f7f7f;
 }
+
+#filter-word-display {
+  margin-bottom: 10px;
+}
