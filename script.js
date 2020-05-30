@@ -30,14 +30,14 @@ const loadNews = async function () {
   await fetch(root_url + `/news`)
     .then((response) => response.json())
     .then((data) => {
-      
+
       let regexFilter = `(${filteredWords.join("|")})`
       const secondFilter = new RegExp(regexFilter, 'i');
       if (filteredWords.length > 0) {
         data = data.filter((article) => !secondFilter.test(article.content) && !secondFilter.test(article.headline))
         // console.log(test)
       }
-    
+
       // Wilson- you can start manipulating the DOM here
       // Data is an array of news article objects
 
@@ -46,7 +46,7 @@ const loadNews = async function () {
         list.removeChild(document.querySelector('#spinner'));
       }
       for (i = data.length - 1; i >= 0; i--) {
-      
+
         // if (!secondFilter.test(data[i].content && !secondFilter.test(data[i].headline))) {
         //   console.log(data[i])
         // }
@@ -142,7 +142,7 @@ const loadNews = async function () {
         reference.setAttribute('id', `read-more-${i}`);
         reference.setAttribute('class', 'expand-btn');
         reference.setAttribute('type', 'button');
-      
+
         reference.innerHTML = 'Read More';
         container.appendChild(reference);
         reference.addEventListener('click', () => {
@@ -159,7 +159,7 @@ const loadNews = async function () {
         let comments = data[i].comments
         let articleId = data[i]._id
         let commentDiv = document.createElement('div')
-        
+
         let commentButton = document.createElement('a');
         commentButton.setAttribute('type', 'button')
         commentButton.innerHTML = 'View all comments<br>';
@@ -499,23 +499,25 @@ const weatherApiCall = async function (weather, location, api) {
   }(window, document);
 
 
-  let filterInput = document.querySelector('#filter-input')
-  let filterDisplay = document.querySelector('#filter-word-display')
+let filterInput = document.querySelector('#filter-input')
+let filterDisplay = document.querySelector('#filter-word-display')
 
-  filterInput.addEventListener('keyup', (event) => {
-    if(event.key === "Enter") {
-      let word = document.createElement('span')
-      word.setAttribute('class', 'filter-bubble')
-      word.innerHTML = filterInput.value
-      filterDisplay.appendChild(word)
-      filteredWords.push(filterInput.value)
-      console.log(`(${filteredWords.join("|")})`)
-      filterInput.value = ''
-      let newsContainer = document.getElementById('news')
-      newsContainer.innerHTML = ""
-      loadNews()
-    }
-  })
+filterInput.addEventListener('keyup', (event) => {
+  if (event.key === "Enter") {
+    let word = document.createElement('span')
+    word.setAttribute('class', 'filter-bubble')
+    word.innerHTML = filterInput.value
+    filterDisplay.appendChild(word)
+    filteredWords.push(filterInput.value)
+    console.log(`(${filteredWords.join("|")})`)
+    filterInput.value = ''
+    let newsContainer = document.getElementById('news')
+    newsContainer.innerHTML = ""
+    loadNews()
+  }
+})
+
+
 
 let resetFilter = document.querySelector('#reset-filter-button')
 resetFilter.addEventListener('click', () => {
@@ -526,4 +528,11 @@ resetFilter.addEventListener('click', () => {
   wordDisplay.innerHTML = ""
   loadNews();
 })
+filterInput.addEventListener('focus', function (event) {
+  filterInput.setAttribute('placeholder', 'Enter keywords you dont want to see')
+})
 
+filterInput.addEventListener('focusout', function (event) {
+  filterInput.value = null;
+  filterInput.removeAttribute('placeholder')
+})
