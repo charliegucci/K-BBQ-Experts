@@ -908,3 +908,9 @@ textarea {
   flex-direction: row;
 
 }
+
+.filter-bubble {
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 15px;
+}

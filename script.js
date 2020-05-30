@@ -11,6 +11,8 @@ const darwin = ['13718', 'Darwin']
 const api = '?apikey=gWJACkbNkGTvPJBxOAkZfy4sxkEo9eU2&metric=true'
 const icon = 'https://www.accuweather.com/images/weathericons/'
 
+let filteredWords = []
+
 const page = document.createElement('div');
 page.setAttribute('id', 'pagination-container');
 const pageNum1 = document.createElement('p');
@@ -28,13 +30,27 @@ const loadNews = async function () {
   await fetch(root_url + `/news`)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
-
+      
+      let regexFilter = `(${filteredWords.join("|")})`
+      const secondFilter = new RegExp(regexFilter, 'i');
+      if (filteredWords.length > 0) {
+        data = data.filter((article) => !secondFilter.test(article.content) && !secondFilter.test(article.headline))
+        // console.log(test)
+      }
+    
       // Wilson- you can start manipulating the DOM here
       // Data is an array of news article objects
+
       let list = document.getElementById('news');
-      list.removeChild(document.querySelector('#spinner'));
+      if (document.querySelector('#spinner')) {
+        list.removeChild(document.querySelector('#spinner'));
+      }
       for (i = data.length - 1; i >= 0; i--) {
+      
+        // if (!secondFilter.test(data[i].content && !secondFilter.test(data[i].headline))) {
+        //   console.log(data[i])
+        // }
+
         let container = document.createElement('div');
         container.setAttribute('class', 'news-div');
         container.setAttribute('id', `item${i + 1}`);
@@ -47,9 +63,6 @@ const loadNews = async function () {
         let headlines = document.createElement('h2');
         headlines.innerHTML = data[i].headline;
         container.appendChild(headlines);
-
-        //image
-        // console.log(data[i].image);
 
         let image = document.createElement('img');
         image.style.height = '350px';
@@ -129,9 +142,7 @@ const loadNews = async function () {
         reference.setAttribute('id', `read-more-${i}`);
         reference.setAttribute('class', 'expand-btn');
         reference.setAttribute('type', 'button');
-        // reference.setAttribute('href', data[i].url);
-        // reference.setAttribute('target', '_blank');
-
+      
         reference.innerHTML = 'Read More';
         container.appendChild(reference);
         reference.addEventListener('click', () => {
@@ -148,9 +159,7 @@ const loadNews = async function () {
         let comments = data[i].comments
         let articleId = data[i]._id
         let commentDiv = document.createElement('div')
-        // let commentTitle = document.createElement('p')
-        // commentTitle.innerHTML = '<strong>Comments</strong>';
-        // commentDiv.appendChild(commentTitle);
+        
         let commentButton = document.createElement('a');
         commentButton.setAttribute('type', 'button')
         commentButton.innerHTML = 'View all comments<br>';
@@ -183,7 +192,6 @@ const loadNews = async function () {
               username: inputUsername.value,
               comment: inputComment.value
             }
-            console.log(inputComment.value)
             fetch(root_url + `/articles/comment/${articleId}`, {
                 method: 'put',
                 headers: {
@@ -387,19 +395,10 @@ const getTopHeadlines = (category) => {
         // linkToArticle.style.borderBottom = 'solid 1px lightgrey'
         topHeadlineDiv.appendChild(linkToArticle);
       }
-      console.log(news);
     });
 };
 
 getTopHeadlines('business');
-
-// let categorySelect = document.getElementsByClassName('category-select');
-
-// let selectEl = document.querySelector('#top-cat-select');
-// selectEl.addEventListener('change', () => {
-//   topHeadlineDiv.innerHTML = '';
-//   getTopHeadlines(selectEl.value);
-// });
 
 let categorySelect = document.getElementsByClassName('option-button')
 
@@ -409,7 +408,6 @@ for (option of categorySelect) {
 
   buttonEl.addEventListener('click', () => {
     topHeadlineDiv.innerHTML = '';
-    console.log(buttonEl.innerHTML.toLowerCase())
     getTopHeadlines(buttonEl.innerHTML.toLowerCase())
   })
 
@@ -499,3 +497,33 @@ const weatherApiCall = async function (weather, location, api) {
       }
     }
   }(window, document);
+
+
+  let filterInput = document.querySelector('#filter-input')
+  let filterDisplay = document.querySelector('#filter-word-display')
+
+  filterInput.addEventListener('keyup', (event) => {
+    if(event.key === "Enter") {
+      let word = document.createElement('span')
+      word.setAttribute('class', 'filter-bubble')
+      word.innerHTML = filterInput.value
+      filterDisplay.appendChild(word)
+      filteredWords.push(filterInput.value)
+      console.log(`(${filteredWords.join("|")})`)
+      filterInput.value = ''
+      let newsContainer = document.getElementById('news')
+      newsContainer.innerHTML = ""
+      loadNews()
+    }
+  })
+
+let resetFilter = document.querySelector('#reset-filter-button')
+resetFilter.addEventListener('click', () => {
+  filteredWords = []
+  let newsContainer = document.getElementById('news')
+  newsContainer.innerHTML = ""
+  let wordDisplay = document.getElementById('filter-word-display')
+  wordDisplay.innerHTML = ""
+  loadNews();
+})
+
